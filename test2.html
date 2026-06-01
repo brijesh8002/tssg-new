@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Interactive UI Ideas Showcase</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  font-family:Arial, sans-serif;
+  background:#0f172a;
+  color:white;
+  overflow-x:hidden;
+}
+
+section{
+  min-height:100vh;
+  padding:100px 40px;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  position:relative;
+}
+
+h1{
+  font-size:48px;
+  margin-bottom:30px;
+}
+
+h2{
+  margin-bottom:20px;
+  font-size:32px;
+}
+
+/* ===================================
+CUSTOM CURSOR
+=================================== */
+
+.cursor{
+  width:20px;
+  height:20px;
+  border:2px solid #38bdf8;
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:9999;
+  transition:transform .08s linear;
+}
+
+.cursor-dot{
+  width:6px;
+  height:6px;
+  background:#38bdf8;
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:9999;
+}
+
+/* ===================================
+MAGNETIC BUTTON
+=================================== */
+
+.magnetic{
+  display:inline-block;
+  padding:18px 40px;
+  background:#38bdf8;
+  color:black;
+  font-weight:bold;
+  border-radius:50px;
+  transition:0.2s;
+  cursor:pointer;
+  user-select:none;
+}
+
+/* ===================================
+EYES
+=================================== */
+
+.face{
+  display:flex;
+  gap:30px;
+  margin-top:40px;
+}
+
+.eye{
+  width:140px;
+  height:140px;
+  background:white;
+  border-radius:50%;
+  position:relative;
+}
+
+.pupil{
+  width:45px;
+  height:45px;
+  background:black;
+  border-radius:50%;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* ===================================
+3D CARD
+=================================== */
+
+.card{
+  width:300px;
+  height:400px;
+  background:linear-gradient(135deg,#1e293b,#334155);
+  border-radius:30px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:30px;
+  transform-style:preserve-3d;
+  transition:0.1s;
+}
+
+/* ===================================
+SPOTLIGHT
+=================================== */
+
+.spotlight{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(
+    circle 180px at var(--x) var(--y),
+    rgba(255,255,255,0.15),
+    transparent 80%
+  );
+}
+
+/* ===================================
+TEXT SCRAMBLE
+=================================== */
+
+.scramble{
+  font-size:70px;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+/* ===================================
+SCROLL REVEAL
+=================================== */
+
+.reveal{
+  opacity:0;
+  transform:translateY(100px);
+  transition:1s;
+}
+
+.reveal.active{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* ===================================
+PARALLAX
+=================================== */
+
+.parallax{
+  position:relative;
+  height:400px;
+  overflow:hidden;
+}
+
+.layer{
+  position:absolute;
+  width:300px;
+  height:300px;
+  border-radius:50%;
+  filter:blur(50px);
+}
+
+.layer1{
+  background:#38bdf8;
+  top:50px;
+  left:100px;
+}
+
+.layer2{
+  background:#ec4899;
+  right:100px;
+  bottom:50px;
+}
+
+/* ===================================
+PROGRESS BAR
+=================================== */
+
+.progress{
+  position:fixed;
+  top:0;
+  left:0;
+  height:5px;
+  width:0%;
+  background:#38bdf8;
+  z-index:999;
+}
+</style>
+</head>
+<body>
+
+<div class="progress"></div>
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
+<div class="spotlight"></div>
+
+<!-- HERO -->
+<section>
+  <h1>Interactive Website Ideas</h1>
+  <p>Move mouse, scroll, hover elements ✨</p>
+</section>
+
+<!-- MAGNETIC BUTTON -->
+<section>
+  <h2>1. Magnetic Button</h2>
+
+  <div class="magnetic">
+    Hover Me
+  </div>
+</section>
+
+<!-- EYES -->
+<section>
+  <h2>2. Eyes Follow Cursor</h2>
+
+  <div class="face">
+    <div class="eye"><div class="pupil"></div></div>
+    <div class="eye"><div class="pupil"></div></div>
+  </div>
+</section>
+
+<!-- 3D CARD -->
+<section>
+  <h2>3. 3D Tilt Card</h2>
+
+  <div class="card">
+    3D CARD
+  </div>
+</section>
+
+<!-- TEXT SCRAMBLE -->
+<section>
+  <h2>4. Text Scramble</h2>
+
+  <div class="scramble">
+    HOVER TEXT
+  </div>
+</section>
+
+<!-- REVEAL -->
+<section>
+  <h2>5. Scroll Reveal</h2>
+
+  <div class="reveal">
+    <h1>Animated Reveal Section</h1>
+  </div>
+</section>
+
+<!-- PARALLAX -->
+<section>
+  <h2>6. Parallax Blobs</h2>
+
+  <div class="parallax">
+    <div class="layer layer1"></div>
+    <div class="layer layer2"></div>
+  </div>
+</section>
+
+<script>
+
+/* ===================================
+CUSTOM CURSOR
+=================================== */
+
+const cursor = document.querySelector(".cursor");
+const dot = document.querySelector(".cursor-dot");
+
+document.addEventListener("mousemove", e => {
+
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+
+  dot.style.left = e.clientX + "px";
+  dot.style.top = e.clientY + "px";
+
+  document.body.style.setProperty("--x", e.clientX + "px");
+  document.body.style.setProperty("--y", e.clientY + "px");
+});
+
+/* ===================================
+MAGNETIC BUTTON
+=================================== */
+
+const magnetic = document.querySelector(".magnetic");
+
+magnetic.addEventListener("mousemove", e => {
+
+  const rect = magnetic.getBoundingClientRect();
+
+  const x = e.clientX - rect.left - rect.width/2;
+  const y = e.clientY - rect.top - rect.height/2;
+
+  magnetic.style.transform = `translate(${x*0.3}px,${y*0.3}px)`;
+});
+
+magnetic.addEventListener("mouseleave", ()=>{
+
+  magnetic.style.transform = `translate(0px,0px)`;
+});
+
+/* ===================================
+EYES FOLLOW
+=================================== */
+
+const pupils = document.querySelectorAll(".pupil");
+
+document.addEventListener("mousemove", e => {
+
+  pupils.forEach(pupil => {
+
+    const eye = pupil.parentElement;
+    const rect = eye.getBoundingClientRect();
+
+    const centerX = rect.left + rect.width/2;
+    const centerY = rect.top + rect.height/2;
+
+    const angle = Math.atan2(
+      e.clientY - centerY,
+      e.clientX - centerX
+    );
+
+    const radius = 30;
+
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+
+    pupil.style.transform =
+      `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+  });
+});
+
+/* ===================================
+3D CARD
+=================================== */
+
+const card = document.querySelector(".card");
+
+card.addEventListener("mousemove", e => {
+
+  const rect = card.getBoundingClientRect();
+
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const rotateY = ((x / rect.width)-0.5) * 30;
+  const rotateX = ((y / rect.height)-0.5) * -30;
+
+  card.style.transform =
+    `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+});
+
+card.addEventListener("mouseleave", ()=>{
+
+  card.style.transform =
+    `rotateX(0deg) rotateY(0deg)`;
+});
+
+/* ===================================
+TEXT SCRAMBLE
+=================================== */
+
+const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+const scramble = document.querySelector(".scramble");
+
+scramble.addEventListener("mouseover", ()=>{
+
+  let iteration = 0;
+
+  const interval = setInterval(()=>{
+
+    scramble.innerText = scramble.innerText
+      .split("")
+      .map((letter,index)=>{
+
+        if(index < iteration){
+          return "HOVER TEXT"[index];
+        }
+
+        return letters[
+          Math.floor(Math.random()*26)
+        ];
+
+      })
+      .join("");
+
+    if(iteration >= "HOVER TEXT".length){
+      clearInterval(interval);
+    }
+
+    iteration += 1/3;
+
+  },30);
+});
+
+/* ===================================
+SCROLL REVEAL
+=================================== */
+
+const reveals = document.querySelectorAll(".reveal");
+
+window.addEventListener("scroll", ()=>{
+
+  reveals.forEach(reveal => {
+
+    const top = reveal.getBoundingClientRect().top;
+
+    if(top < window.innerHeight - 100){
+      reveal.classList.add("active");
+    }
+  });
+
+  /* Progress Bar */
+
+  const scrollTop = window.scrollY;
+
+  const docHeight =
+    document.body.scrollHeight - window.innerHeight;
+
+  const progress = (scrollTop/docHeight)*100;
+
+  document.querySelector(".progress")
+    .style.width = progress + "%";
+});
+
+/* ===================================
+PARALLAX
+=================================== */
+
+document.addEventListener("mousemove", e => {
+
+  document.querySelector(".layer1").style.transform =
+    `translate(${e.clientX * 0.02}px,
+               ${e.clientY * 0.02}px)`;
+
+  document.querySelector(".layer2").style.transform =
+    `translate(${e.clientX * -0.02}px,
+               ${e.clientY * -0.02}px)`;
+});
+
+</script>
+
+</body>
+</html>

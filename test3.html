@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Premium Interactive UI</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#050816;
+  color:white;
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+}
+
+/* ===========================
+SMOOTH SCROLL
+=========================== */
+
+html{
+  scroll-behavior:smooth;
+}
+
+/* ===========================
+NAVBAR
+=========================== */
+
+nav{
+  position:fixed;
+  width:100%;
+  top:0;
+  left:0;
+  padding:25px 60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:999;
+  transition:.4s;
+}
+
+nav.active{
+  background:rgba(5,8,22,.75);
+  backdrop-filter:blur(20px);
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.logo{
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.menu{
+  display:flex;
+  gap:40px;
+}
+
+.menu a{
+  color:white;
+  text-decoration:none;
+  position:relative;
+}
+
+.menu a::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-5px;
+  width:0%;
+  height:2px;
+  background:#8b5cf6;
+  transition:.3s;
+}
+
+.menu a:hover::after{
+  width:100%;
+}
+
+/* ===========================
+CUSTOM CURSOR
+=========================== */
+
+.cursor{
+  width:40px;
+  height:40px;
+  border:1px solid rgba(255,255,255,.6);
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:99999;
+  transition:
+    width .3s,
+    height .3s,
+    background .3s;
+}
+
+.cursor-dot{
+  width:8px;
+  height:8px;
+  background:white;
+  border-radius:50%;
+  position:fixed;
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:99999;
+}
+
+.hovered{
+  width:70px;
+  height:70px;
+  background:rgba(139,92,246,.2);
+}
+
+/* ===========================
+HERO
+=========================== */
+
+.hero{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero-content{
+  text-align:center;
+  z-index:2;
+}
+
+.hero h1{
+  font-size:90px;
+  line-height:1;
+  margin-bottom:20px;
+  background:linear-gradient(to right,#fff,#8b5cf6);
+  -webkit-background-clip:text;
+  color:transparent;
+}
+
+.hero p{
+  font-size:20px;
+  opacity:.8;
+}
+
+/* ===========================
+FLOATING GLOW BLOBS
+=========================== */
+
+.blob{
+  position:absolute;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.4;
+  animation:float 10s infinite alternate;
+}
+
+.blob1{
+  width:400px;
+  height:400px;
+  background:#8b5cf6;
+  top:-100px;
+  left:-100px;
+}
+
+.blob2{
+  width:350px;
+  height:350px;
+  background:#06b6d4;
+  bottom:-100px;
+  right:-100px;
+}
+
+@keyframes float{
+
+  0%{
+    transform:translateY(0px);
+  }
+
+  100%{
+    transform:translateY(60px);
+  }
+}
+
+/* ===========================
+GLASS CARDS
+=========================== */
+
+.section{
+  padding:120px 60px;
+}
+
+.title{
+  font-size:50px;
+  margin-bottom:60px;
+}
+
+.cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+  gap:40px;
+}
+
+.card{
+  height:350px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  border-radius:30px;
+  padding:40px;
+  transition:.4s;
+  position:relative;
+  overflow:hidden;
+  transform-style:preserve-3d;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  width:200px;
+  height:200px;
+  background:rgba(255,255,255,.08);
+  border-radius:50%;
+  top:-50px;
+  right:-50px;
+}
+
+.card:hover{
+  transform:
+    rotateX(10deg)
+    rotateY(-10deg)
+    translateY(-10px);
+  box-shadow:0 20px 50px rgba(0,0,0,.4);
+}
+
+.card h2{
+  margin-bottom:20px;
+}
+
+.card p{
+  opacity:.7;
+  line-height:1.7;
+}
+
+/* ===========================
+MAGNETIC BUTTON
+=========================== */
+
+.btn{
+  margin-top:40px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:180px;
+  height:60px;
+  border-radius:60px;
+  background:#8b5cf6;
+  color:white;
+  font-weight:600;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:.3s;
+}
+
+.btn span{
+  position:relative;
+  z-index:2;
+}
+
+.btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    45deg,
+    #8b5cf6,
+    #06b6d4
+  );
+  opacity:0;
+  transition:.3s;
+}
+
+.btn:hover::before{
+  opacity:1;
+}
+
+/* ===========================
+TEXT REVEAL
+=========================== */
+
+.reveal-text{
+  font-size:70px;
+  line-height:1.2;
+  max-width:1000px;
+  opacity:0;
+  transform:translateY(80px);
+  transition:1s;
+}
+
+.reveal-text.active{
+  opacity:1;
+  transform:translateY(0px);
+}
+
+/* ===========================
+SCROLL PROGRESS
+=========================== */
+
+.progress{
+  position:fixed;
+  top:0;
+  left:0;
+  width:0%;
+  height:4px;
+  background:linear-gradient(
+    to right,
+    #8b5cf6,
+    #06b6d4
+  );
+  z-index:9999;
+}
+
+/* ===========================
+NOISE OVERLAY
+=========================== */
+
+.noise{
+  position:fixed;
+  inset:0;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
+  opacity:.04;
+  pointer-events:none;
+  z-index:999;
+}
+
+</style>
+</head>
+<body>
+
+<div class="progress"></div>
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
+<div class="noise"></div>
+
+<!-- NAV -->
+
+<nav id="nav">
+  <div class="logo">PREMIUM</div>
+
+  <div class="menu">
+    <a href="#">Home</a>
+    <a href="#">Works</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+
+<section class="hero">
+
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+
+  <div class="hero-content">
+    <h1>Future UI Experience</h1>
+
+    <p>
+      Modern interactive animations with premium feel
+    </p>
+
+    <div class="btn magnetic">
+      <span>Explore</span>
+    </div>
+  </div>
+
+</section>
+
+<!-- CARDS -->
+
+<section class="section">
+
+  <h1 class="title">Premium Cards</h1>
+
+  <div class="cards">
+
+    <div class="card">
+      <h2>Glassmorphism</h2>
+      <p>
+        Frosted glass premium UI effect with blur and lighting.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>3D Interaction</h2>
+      <p>
+        Mouse reactive tilt animations for immersive experience.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Smooth Motion</h2>
+      <p>
+        Elegant transitions and cinematic movement effects.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- TEXT REVEAL -->
+
+<section class="section">
+
+  <div class="reveal-text">
+    We create immersive digital experiences with cinematic interactions and futuristic aesthetics.
+  </div>
+
+</section>
+
+<script>
+
+/* ===========================
+CURSOR
+=========================== */
+
+const cursor = document.querySelector(".cursor");
+const dot = document.querySelector(".cursor-dot");
+
+document.addEventListener("mousemove", e=>{
+
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+
+  dot.style.left = e.clientX + "px";
+  dot.style.top = e.clientY + "px";
+});
+
+/* ===========================
+CURSOR HOVER
+=========================== */
+
+document.querySelectorAll("a,.btn,.card")
+.forEach(el=>{
+
+  el.addEventListener("mouseenter",()=>{
+
+    cursor.classList.add("hovered");
+  });
+
+  el.addEventListener("mouseleave",()=>{
+
+    cursor.classList.remove("hovered");
+  });
+});
+
+/* ===========================
+NAV ACTIVE
+=========================== */
+
+window.addEventListener("scroll",()=>{
+
+  const nav = document.getElementById("nav");
+
+  if(window.scrollY > 50){
+
+    nav.classList.add("active");
+
+  }else{
+
+    nav.classList.remove("active");
+  }
+
+  /* progress */
+
+  const scrollTop = window.scrollY;
+
+  const docHeight =
+    document.body.scrollHeight - window.innerHeight;
+
+  const progress =
+    (scrollTop/docHeight)*100;
+
+  document.querySelector(".progress")
+    .style.width = progress + "%";
+});
+
+/* ===========================
+MAGNETIC BUTTON
+=========================== */
+
+const magnetic = document.querySelector(".magnetic");
+
+magnetic.addEventListener("mousemove", e=>{
+
+  const rect = magnetic.getBoundingClientRect();
+
+  const x = e.clientX - rect.left - rect.width/2;
+  const y = e.clientY - rect.top - rect.height/2;
+
+  magnetic.style.transform =
+    `translate(${x*0.3}px,${y*0.3}px)`;
+});
+
+magnetic.addEventListener("mouseleave",()=>{
+
+  magnetic.style.transform =
+    `translate(0px,0px)`;
+});
+
+/* ===========================
+REVEAL TEXT
+=========================== */
+
+const reveal = document.querySelector(".reveal-text");
+
+window.addEventListener("scroll",()=>{
+
+  const top =
+    reveal.getBoundingClientRect().top;
+
+  if(top < window.innerHeight - 100){
+
+    reveal.classList.add("active");
+  }
+});
+
+/* ===========================
+3D CARD TILT
+=========================== */
+
+document.querySelectorAll(".card")
+.forEach(card=>{
+
+  card.addEventListener("mousemove", e=>{
+
+    const rect = card.getBoundingClientRect();
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const rotateY =
+      ((x/rect.width)-0.5)*20;
+
+    const rotateX =
+      ((y/rect.height)-0.5)*-20;
+
+    card.style.transform =
+      `rotateX(${rotateX}deg)
+       rotateY(${rotateY}deg)
+       translateY(-10px)`;
+  });
+
+  card.addEventListener("mouseleave",()=>{
+
+    card.style.transform =
+      `rotateX(0deg)
+       rotateY(0deg)
+       translateY(0px)`;
+  });
+});
+
+</script>
+
+</body>
+</html>

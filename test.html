@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eyes Follow Cursor</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #141e30, #243b55);
+      overflow: hidden;
+    }
+
+    .face {
+      display: flex;
+      gap: 40px;
+    }
+
+    .eye {
+      width: 140px;
+      height: 140px;
+      background: #fff;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.15),
+        0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .pupil {
+      width: 45px;
+      height: 45px;
+      background: #111;
+      border-radius: 50%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      transition: transform 0.05s linear;
+    }
+
+    .pupil::after {
+      content: "";
+      width: 14px;
+      height: 14px;
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 8px;
+      left: 8px;
+    }
+  </style>
+  <body>
+    <div class="face">
+      <div class="eye">
+        <div class="pupil"></div>
+      </div>
+
+      <div class="eye">
+        <div class="pupil"></div>
+      </div>
+    </div>
+
+    <script>
+      const pupils = document.querySelectorAll(".pupil");
+
+      document.addEventListener("mousemove", (e) => {
+        pupils.forEach((pupil) => {
+          const eye = pupil.parentElement;
+          const rect = eye.getBoundingClientRect();
+
+          const eyeCenterX = rect.left + rect.width / 2;
+          const eyeCenterY = rect.top + rect.height / 2;
+
+          const angle = Math.atan2(
+            e.clientY - eyeCenterY,
+            e.clientX - eyeCenterX,
+          );
+
+          // Distance pupil can move
+          const radius = 30;
+
+          const x = Math.cos(angle) * radius;
+          const y = Math.sin(angle) * radius;
+
+          pupil.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        });
+      });
+    </script>
+  </body>
+</html>
