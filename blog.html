@@ -1,0 +1,626 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tssg-Tech</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css"
+    />
+
+    <!-- SWIPPER JS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <!-- AOS Animation -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+
+  <body>
+    <!-- PREMIUM ANIMATED CURSOR -->
+    <div class="vx12-cursor"></div>
+
+    <!-- DOTS -->
+    <div class="vx12-dot"></div>
+    <div class="vx12-dot"></div>
+    <div class="vx12-dot"></div>
+    <div class="vx12-dot"></div>
+    <div class="vx12-dot"></div>
+    <div class="vx12-dot"></div>
+    <div class="vx12-dot"></div>
+    <div class="vx12-dot"></div>
+    <main>
+      <!-- HEADER -->
+      <header id="header"></header>
+
+
+  <!-- ============================================================
+       BLOG HERO
+  ============================================================ -->
+  <section class="blog-hero">
+    <div class="container">
+      <div class="blog-hero-inner">
+        <div class="blog-hero-eyebrow">TSSG-TECH</div>
+        <h1 class="blog-hero-title">Insights & <span>Ideas</span></h1>
+        <p class="blog-hero-sub">Deep-dive articles on web development, UI/UX design, digital strategy and emerging tech — written by the TSSG-TECH team.</p>
+        <div class="blog-hero-stats">
+          <div class="blog-hero-stat"><i class="bi bi-journal-richtext"></i><strong>120+</strong> Articles</div>
+          <div class="blog-hero-stat"><i class="bi bi-people"></i><strong>8,400+</strong> Readers</div>
+          <div class="blog-hero-stat"><i class="bi bi-tags"></i><strong>6</strong> Categories</div>
+          <div class="blog-hero-stat"><i class="bi bi-calendar3"></i> Weekly Updates</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       SEARCH + FILTER BAR
+  ============================================================ -->
+  <section class="blog-controls">
+    <div class="container">
+      <div class="blog-controls-inner">
+        <div class="blog-search">
+          <i class="bi bi-search blog-search-icon"></i>
+          <input type="text" id="blogSearchInput" placeholder="Search articles…"/>
+        </div>
+        <div class="blog-filter-tabs" id="blogFilterTabs">
+          <button class="blog-filter-btn active" data-filter="all">All</button>
+          <button class="blog-filter-btn" data-filter="tech">Technology</button>
+          <button class="blog-filter-btn" data-filter="design">Design</button>
+          <button class="blog-filter-btn" data-filter="dev">Development</button>
+          <button class="blog-filter-btn" data-filter="seo">SEO</button>
+          <button class="blog-filter-btn" data-filter="startup">Startup</button>
+          <button class="blog-filter-btn" data-filter="ai">AI & ML</button>
+        </div>
+        <select class="blog-sort-select" id="blogSort">
+          <option value="latest">Latest First</option>
+          <option value="popular">Most Popular</option>
+          <option value="oldest">Oldest First</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       FEATURED POST
+  ============================================================ -->
+  <section class="blog-featured">
+    <div class="container">
+      <div class="blog-section-label">
+        <div class="lbl-line"></div>
+        <h4>Featured Article</h4>
+      </div>
+      <a href="blog-detail.html" class="blog-featured-card d-block">
+        <div class="blog-featured-visual">
+          <div class="visual-inner visual-tech">
+            <div class="visual-tech-grid"></div>
+            <div class="visual-tech-glow"></div>
+            <div class="visual-tech-content">
+              <div class="visual-icon-ring"><i class="bi bi-cpu"></i></div>
+              <div class="visual-tech-label">The Future of<br>AI-Driven Web Design</div>
+              <div class="visual-tech-sub">A Deep Dive by TSSG-TECH</div>
+            </div>
+          </div>
+          <div class="post-category-pill pill-ai"><i class="bi bi-stars"></i> AI & ML</div>
+        </div>
+        <div class="blog-featured-info">
+          <div class="featured-badge">Featured Article</div>
+          <h2 class="featured-title">How AI Is Completely Reshaping the Future of Web Design in 2026</h2>
+          <p class="featured-excerpt">Artificial intelligence is no longer a buzzword — it's rewriting the rules of design, development, and digital experiences. We break down the biggest shifts happening right now, from generative UI to predictive UX patterns and what it means for businesses building online.</p>
+          <div class="post-meta">
+            <div class="post-meta-item"><i class="bi bi-person-circle"></i><strong>Rahul Sharma</strong></div>
+            <div class="post-meta-item"><i class="bi bi-calendar3"></i><strong>Jun 10, 2026</strong></div>
+            <div class="post-meta-item"><i class="bi bi-clock"></i><strong>9 min read</strong></div>
+            <div class="post-meta-item"><i class="bi bi-eye"></i><strong>4,820 views</strong></div>
+          </div>
+          <a href="blog-detail.html" class="btn-read-more">
+            Read Full Article
+            <span class="btn-arrow"><i class="bi bi-arrow-right"></i></span>
+          </a>
+        </div>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       MAIN POSTS + SIDEBAR
+  ============================================================ -->
+  <section class="blog-main">
+    <div class="container">
+      <div class="blog-grid-wrap">
+
+        <!-- ── Posts Grid ──────────────────────────────────── -->
+        <div>
+          <div class="blog-section-label">
+            <div class="lbl-line"></div>
+            <h4>Latest Articles</h4>
+          </div>
+          <div class="posts-grid" id="postsGrid">
+
+            <!-- WIDE CARD 1 -->
+            <div class="post-card post-card-wide blog-post-item" data-cat="dev" data-title="Build a Full-Stack Web App with Next.js 15 and Supabase">
+              <div class="post-card-visual">
+                <div class="post-visual-inner pv-web">
+                  <div class="pv-grid-lines"></div>
+                  <div class="pv-center-icon">
+                    <div class="pv-icon-wrap" style="background:rgba(72,176,168,0.15);color:var(--main-color);"><i class="bi bi-code-slash"></i></div>
+                    <div class="pv-label">Full-Stack<br>Next.js 15</div>
+                  </div>
+                </div>
+                <div class="post-category-pill pill-dev"><i class="bi bi-braces"></i> Development</div>
+                <div class="post-card-overlay">
+                  <div class="overlay-read-btn"><i class="bi bi-book"></i> Read Article</div>
+                </div>
+              </div>
+              <div class="post-card-body">
+                <div class="post-card-title">Build a Full-Stack Web App with Next.js 15 and Supabase — Step by Step</div>
+                <div class="post-card-excerpt">A comprehensive tutorial walking you through project setup, authentication flows, real-time data, and deployment on Vercel — everything you need to ship production-ready apps in 2026.</div>
+                <div class="post-card-footer">
+                  <div class="post-author">
+                    <div class="author-avatar">AK</div>
+                    <div class="author-name">Amit Kumar</div>
+                  </div>
+                  <div class="post-read-time"><i class="bi bi-clock"></i> 12 min read</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 1 -->
+            <div class="post-card blog-post-item" data-cat="design" data-title="UI Trends Dominating 2026">
+              <div class="post-card-visual">
+                <div class="post-visual-inner pv-design">
+                  <div class="pv-grid-lines"></div>
+                  <div class="pv-center-icon">
+                    <div class="pv-icon-wrap" style="background:rgba(88,35,159,0.2);color:#b07ef5;"><i class="bi bi-palette2"></i></div>
+                    <div class="pv-label">UI Trends<br>2026</div>
+                  </div>
+                </div>
+                <div class="post-category-pill pill-design"><i class="bi bi-palette2"></i> Design</div>
+                <div class="post-card-overlay">
+                  <div class="overlay-read-btn"><i class="bi bi-book"></i> Read Article</div>
+                </div>
+              </div>
+              <div class="post-card-body">
+                <div class="post-card-title">10 UI Design Trends Dominating the Web in 2026</div>
+                <div class="post-card-excerpt">Glassmorphism is out, bento grids are in. Explore the dominant visual directions shaping the web this year and how to apply them effectively.</div>
+                <div class="post-card-footer">
+                  <div class="post-author">
+                    <div class="author-avatar">PS</div>
+                    <div class="author-name">Priya Singh</div>
+                  </div>
+                  <div class="post-read-time"><i class="bi bi-clock"></i> 7 min read</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 2 -->
+            <div class="post-card blog-post-item" data-cat="seo" data-title="SEO Strategy 2026 Core Web Vitals">
+              <div class="post-card-visual">
+                <div class="post-visual-inner pv-seo">
+                  <div class="pv-grid-lines"></div>
+                  <div class="pv-center-icon">
+                    <div class="pv-icon-wrap" style="background:rgba(255,160,80,0.15);color:#f9a654;"><i class="bi bi-graph-up-arrow"></i></div>
+                    <div class="pv-label">SEO<br>Strategy</div>
+                  </div>
+                </div>
+                <div class="post-category-pill pill-seo"><i class="bi bi-graph-up-arrow"></i> SEO</div>
+                <div class="post-card-overlay">
+                  <div class="overlay-read-btn"><i class="bi bi-book"></i> Read Article</div>
+                </div>
+              </div>
+              <div class="post-card-body">
+                <div class="post-card-title">The Complete SEO Strategy for 2026: Core Web Vitals & Beyond</div>
+                <div class="post-card-excerpt">Google's ranking signals have shifted. Here's the updated framework for technical SEO, content structure, and page experience that actually moves rankings.</div>
+                <div class="post-card-footer">
+                  <div class="post-author">
+                    <div class="author-avatar">VR</div>
+                    <div class="author-name">Vikram Rao</div>
+                  </div>
+                  <div class="post-read-time"><i class="bi bi-clock"></i> 8 min read</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 3 -->
+            <div class="post-card blog-post-item" data-cat="startup" data-title="Startup Website Mistakes">
+              <div class="post-card-visual">
+                <div class="post-visual-inner pv-startup">
+                  <div class="pv-grid-lines"></div>
+                  <div class="pv-center-icon">
+                    <div class="pv-icon-wrap" style="background:rgba(200,80,120,0.15);color:#f07ab0;"><i class="bi bi-rocket-takeoff"></i></div>
+                    <div class="pv-label">Startup<br>Mistakes</div>
+                  </div>
+                </div>
+                <div class="post-category-pill pill-startup"><i class="bi bi-rocket-takeoff"></i> Startup</div>
+                <div class="post-card-overlay">
+                  <div class="overlay-read-btn"><i class="bi bi-book"></i> Read Article</div>
+                </div>
+              </div>
+              <div class="post-card-body">
+                <div class="post-card-title">7 Costly Website Mistakes Startups Make (And How to Avoid Them)</div>
+                <div class="post-card-excerpt">From slow landing pages to missing trust signals — these common blunders are silently killing conversion rates for early-stage companies.</div>
+                <div class="post-card-footer">
+                  <div class="post-author">
+                    <div class="author-avatar">NS</div>
+                    <div class="author-name">Neha Sharma</div>
+                  </div>
+                  <div class="post-read-time"><i class="bi bi-clock"></i> 6 min read</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 4 -->
+            <div class="post-card blog-post-item" data-cat="ai" data-title="ChatGPT API Integration Web Apps">
+              <div class="post-card-visual">
+                <div class="post-visual-inner pv-ai">
+                  <div class="pv-grid-lines"></div>
+                  <div class="pv-center-icon">
+                    <div class="pv-icon-wrap" style="background:rgba(100,220,160,0.15);color:#5ddb9e;"><i class="bi bi-robot"></i></div>
+                    <div class="pv-label">ChatGPT<br>Integration</div>
+                  </div>
+                </div>
+                <div class="post-category-pill pill-ai"><i class="bi bi-stars"></i> AI & ML</div>
+                <div class="post-card-overlay">
+                  <div class="overlay-read-btn"><i class="bi bi-book"></i> Read Article</div>
+                </div>
+              </div>
+              <div class="post-card-body">
+                <div class="post-card-title">Integrating ChatGPT API Into Your Web App: A Practical Guide</div>
+                <div class="post-card-excerpt">Learn how to add intelligent chat, auto-complete, and content generation directly into your product using OpenAI's API — with real code examples.</div>
+                <div class="post-card-footer">
+                  <div class="post-author">
+                    <div class="author-avatar">RK</div>
+                    <div class="author-name">Rohan Kapoor</div>
+                  </div>
+                  <div class="post-read-time"><i class="bi bi-clock"></i> 10 min read</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 5 -->
+            <div class="post-card blog-post-item" data-cat="dev" data-title="Mobile-First Development Best Practices">
+              <div class="post-card-visual">
+                <div class="post-visual-inner pv-mobile">
+                  <div class="pv-grid-lines"></div>
+                  <div class="pv-center-icon">
+                    <div class="pv-icon-wrap" style="background:rgba(88,35,159,0.2);color:#b07ef5;"><i class="bi bi-phone"></i></div>
+                    <div class="pv-label">Mobile-First<br>Dev</div>
+                  </div>
+                </div>
+                <div class="post-category-pill pill-dev"><i class="bi bi-braces"></i> Development</div>
+                <div class="post-card-overlay">
+                  <div class="overlay-read-btn"><i class="bi bi-book"></i> Read Article</div>
+                </div>
+              </div>
+              <div class="post-card-body">
+                <div class="post-card-title">Mobile-First Development: Best Practices Every Developer Must Know</div>
+                <div class="post-card-excerpt">With 72% of traffic now mobile, building mobile-first isn't optional. Here are the patterns, tools, and mental models that make it work in practice.</div>
+                <div class="post-card-footer">
+                  <div class="post-author">
+                    <div class="author-avatar">AK</div>
+                    <div class="author-name">Amit Kumar</div>
+                  </div>
+                  <div class="post-read-time"><i class="bi bi-clock"></i> 8 min read</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 6 -->
+            <div class="post-card blog-post-item" data-cat="tech" data-title="Cloud Hosting Guide AWS vs Vercel vs Firebase">
+              <div class="post-card-visual">
+                <div class="post-visual-inner pv-cloud">
+                  <div class="pv-grid-lines"></div>
+                  <div class="pv-center-icon">
+                    <div class="pv-icon-wrap" style="background:rgba(72,176,168,0.15);color:var(--main-color);"><i class="bi bi-cloud-arrow-up"></i></div>
+                    <div class="pv-label">Cloud<br>Hosting</div>
+                  </div>
+                </div>
+                <div class="post-category-pill pill-tech"><i class="bi bi-lightning-charge"></i> Technology</div>
+                <div class="post-card-overlay">
+                  <div class="overlay-read-btn"><i class="bi bi-book"></i> Read Article</div>
+                </div>
+              </div>
+              <div class="post-card-body">
+                <div class="post-card-title">Cloud Hosting in 2026: AWS vs Vercel vs Firebase — Which to Choose?</div>
+                <div class="post-card-excerpt">A no-nonsense comparison of the three most popular hosting platforms, broken down by use case, pricing, performance, and developer experience.</div>
+                <div class="post-card-footer">
+                  <div class="post-author">
+                    <div class="author-avatar">VR</div>
+                    <div class="author-name">Vikram Rao</div>
+                  </div>
+                  <div class="post-read-time"><i class="bi bi-clock"></i> 11 min read</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 7 -->
+            <div class="post-card blog-post-item" data-cat="design" data-title="UX Research Methods for Small Teams">
+              <div class="post-card-visual">
+                <div class="post-visual-inner pv-ux">
+                  <div class="pv-grid-lines"></div>
+                  <div class="pv-center-icon">
+                    <div class="pv-icon-wrap" style="background:rgba(255,160,80,0.15);color:#f9a654;"><i class="bi bi-eyeglasses"></i></div>
+                    <div class="pv-label">UX Research<br>Methods</div>
+                  </div>
+                </div>
+                <div class="post-category-pill pill-design"><i class="bi bi-palette2"></i> Design</div>
+                <div class="post-card-overlay">
+                  <div class="overlay-read-btn"><i class="bi bi-book"></i> Read Article</div>
+                </div>
+              </div>
+              <div class="post-card-body">
+                <div class="post-card-title">UX Research Methods for Small Teams: Do More With Less</div>
+                <div class="post-card-excerpt">You don't need a massive research budget to make data-driven design decisions. These lean methods deliver real insights fast — even for solo designers.</div>
+                <div class="post-card-footer">
+                  <div class="post-author">
+                    <div class="author-avatar">PS</div>
+                    <div class="author-name">Priya Singh</div>
+                  </div>
+                  <div class="post-read-time"><i class="bi bi-clock"></i> 6 min read</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- No results -->
+            <div class="no-results" id="noResults" style="display:none;">
+              <i class="bi bi-search"></i>
+              <p>No articles found. Try a different search or category.</p>
+            </div>
+
+          </div><!-- /posts-grid -->
+
+          <!-- Pagination -->
+          <div class="blog-pagination" id="blogPagination">
+            <button class="page-btn arrow"><i class="bi bi-chevron-left"></i></button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <span class="page-ellipsis">…</span>
+            <button class="page-btn">8</button>
+            <button class="page-btn arrow"><i class="bi bi-chevron-right"></i></button>
+          </div>
+        </div><!-- /posts col -->
+
+
+        <!-- ── Sidebar ──────────────────────────────────────── -->
+        <aside class="blog-sidebar">
+
+          <!-- Search -->
+          <div class="sidebar-widget">
+            <div class="widget-header">
+              <div class="widget-header-dot"></div>
+              <h5>Search Articles</h5>
+            </div>
+            <div class="widget-body">
+              <div class="sidebar-search">
+                <input type="text" placeholder="Find an article…"/>
+                <button class="sidebar-search-btn"><i class="bi bi-search"></i></button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Newsletter -->
+          <div class="newsletter-widget">
+            <div class="newsletter-icon"><i class="bi bi-envelope-paper-fill"></i></div>
+            <h5>Stay in the Loop</h5>
+            <p>Get fresh insights delivered every week — no spam, just valuable content for developers and designers.</p>
+            <div class="newsletter-form">
+              <input type="email" placeholder="Your email address…"/>
+              <button class="newsletter-btn">Subscribe Free →</button>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-widget">
+            <div class="widget-header">
+              <div class="widget-header-dot"></div>
+              <h5>Browse Categories</h5>
+            </div>
+            <div class="widget-body">
+              <ul class="cat-list">
+                <li><a href="#" class="active-cat"><i class="bi bi-lightning-charge me-2" style="color:var(--main-color);font-size:0.8rem;"></i>Technology<span>24</span></a></li>
+                <li><a href="#"><i class="bi bi-palette2 me-2" style="color:#b07ef5;font-size:0.8rem;"></i>Design<span>18</span></a></li>
+                <li><a href="#"><i class="bi bi-braces me-2" style="color:#6ab4ff;font-size:0.8rem;"></i>Development<span>31</span></a></li>
+                <li><a href="#"><i class="bi bi-graph-up-arrow me-2" style="color:#f9a654;font-size:0.8rem;"></i>SEO<span>15</span></a></li>
+                <li><a href="#"><i class="bi bi-rocket-takeoff me-2" style="color:#f07ab0;font-size:0.8rem;"></i>Startup<span>12</span></a></li>
+                <li><a href="#"><i class="bi bi-stars me-2" style="color:#5ddb9e;font-size:0.8rem;"></i>AI & ML<span>20</span></a></li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Recent Posts -->
+          <div class="sidebar-widget">
+            <div class="widget-header">
+              <div class="widget-header-dot"></div>
+              <h5>Recent Posts</h5>
+            </div>
+            <div class="widget-body">
+              <ul class="recent-list">
+                <li class="recent-post-item">
+                  <div class="recent-thumb" style="background:rgba(72,176,168,0.12);color:var(--main-color);"><i class="bi bi-cpu"></i></div>
+                  <div class="recent-info">
+                    <div class="recent-title">How AI Is Completely Reshaping Web Design in 2026</div>
+                    <div class="recent-date"><i class="bi bi-calendar3"></i> Jun 10, 2026</div>
+                  </div>
+                </li>
+                <li class="recent-post-item">
+                  <div class="recent-thumb" style="background:rgba(88,35,159,0.15);color:#b07ef5;"><i class="bi bi-palette2"></i></div>
+                  <div class="recent-info">
+                    <div class="recent-title">10 UI Design Trends Dominating the Web in 2026</div>
+                    <div class="recent-date"><i class="bi bi-calendar3"></i> Jun 6, 2026</div>
+                  </div>
+                </li>
+                <li class="recent-post-item">
+                  <div class="recent-thumb" style="background:rgba(72,140,220,0.15);color:#6ab4ff;"><i class="bi bi-code-slash"></i></div>
+                  <div class="recent-info">
+                    <div class="recent-title">Full-Stack Web App with Next.js 15 and Supabase</div>
+                    <div class="recent-date"><i class="bi bi-calendar3"></i> Jun 2, 2026</div>
+                  </div>
+                </li>
+                <li class="recent-post-item">
+                  <div class="recent-thumb" style="background:rgba(255,160,80,0.12);color:#f9a654;"><i class="bi bi-graph-up-arrow"></i></div>
+                  <div class="recent-info">
+                    <div class="recent-title">The Complete SEO Strategy for 2026</div>
+                    <div class="recent-date"><i class="bi bi-calendar3"></i> May 28, 2026</div>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Blog Stats -->
+          <div class="sidebar-widget">
+            <div class="widget-header">
+              <div class="widget-header-dot"></div>
+              <h5>Blog Stats</h5>
+            </div>
+            <div class="widget-body">
+              <div class="popular-tag-stats">
+                <div class="popular-stat-card">
+                  <div class="popular-stat-num">120+</div>
+                  <div class="popular-stat-lbl">Articles</div>
+                </div>
+                <div class="popular-stat-card">
+                  <div class="popular-stat-num">8.4K</div>
+                  <div class="popular-stat-lbl">Readers</div>
+                </div>
+                <div class="popular-stat-card">
+                  <div class="popular-stat-num">14</div>
+                  <div class="popular-stat-lbl">Authors</div>
+                </div>
+                <div class="popular-stat-card">
+                  <div class="popular-stat-num">6</div>
+                  <div class="popular-stat-lbl">Categories</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="sidebar-widget">
+            <div class="widget-header">
+              <div class="widget-header-dot"></div>
+              <h5>Popular Tags</h5>
+            </div>
+            <div class="widget-body">
+              <div class="tags-cloud">
+                <span class="tag-chip">React</span>
+                <span class="tag-chip">Next.js</span>
+                <span class="tag-chip">UI Design</span>
+                <span class="tag-chip">SEO</span>
+                <span class="tag-chip">AI</span>
+                <span class="tag-chip">Bootstrap</span>
+                <span class="tag-chip">Node.js</span>
+                <span class="tag-chip">CSS</span>
+                <span class="tag-chip">Figma</span>
+                <span class="tag-chip">Startup</span>
+                <span class="tag-chip">Mobile</span>
+                <span class="tag-chip">Cloud</span>
+              </div>
+            </div>
+          </div>
+
+        </aside><!-- /sidebar -->
+
+      </div><!-- /grid-wrap -->
+    </div>
+  </section>
+
+      <!-- Footer Start -->
+      <footer class="footer" id="footer"></footer>
+
+      <!-- Footer End -->
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <!-- Tilt Js -->
+    <script src="tilt.jquery.js"></script>
+    <!-- Tilt Js -->
+
+    <!-- AOS Animation -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <!-- AOS Animation -->
+  <script>
+    // ── Filter Tabs ──────────────────────────────────────────
+    const filterTabs = document.getElementById('blogFilterTabs');
+    const postItems  = document.querySelectorAll('.blog-post-item');
+    const noResults  = document.getElementById('noResults');
+
+    function applyFilters() {
+      const activeBtn  = filterTabs.querySelector('.blog-filter-btn.active');
+      const filter     = activeBtn ? activeBtn.dataset.filter : 'all';
+      const searchVal  = document.getElementById('blogSearchInput').value.toLowerCase();
+      let visibleCount = 0;
+
+      postItems.forEach(item => {
+        const cat   = item.dataset.cat;
+        const title = item.dataset.title.toLowerCase();
+        const bodyTxt = item.querySelector('.post-card-title')?.textContent.toLowerCase() || '';
+        const excTxt  = item.querySelector('.post-card-excerpt')?.textContent.toLowerCase() || '';
+
+        const catMatch  = filter === 'all' || cat === filter;
+        const textMatch = !searchVal || title.includes(searchVal) || bodyTxt.includes(searchVal) || excTxt.includes(searchVal);
+        const visible   = catMatch && textMatch;
+
+        item.style.display = visible ? '' : 'none';
+        if (visible) visibleCount++;
+      });
+
+      noResults.style.display = visibleCount === 0 ? 'block' : 'none';
+    }
+
+    filterTabs.addEventListener('click', function(e) {
+      const btn = e.target.closest('.blog-filter-btn');
+      if (!btn) return;
+      filterTabs.querySelectorAll('.blog-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilters();
+    });
+
+    document.getElementById('blogSearchInput').addEventListener('input', applyFilters);
+
+    // ── Pagination ────────────────────────────────────────────
+    document.querySelectorAll('.page-btn:not(.arrow)').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.page-btn:not(.arrow)').forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // ── Post Cards → detail link ─────────────────────────────
+    document.querySelectorAll('.post-card').forEach(card => {
+      card.addEventListener('click', function() {
+        window.location.href = 'blog-detail.html';
+      });
+    });
+  </script>
+</body>
+</html>

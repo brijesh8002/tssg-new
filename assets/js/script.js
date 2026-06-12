@@ -42,8 +42,8 @@ function initNavbar() {
     }
   };
 
-  const tourLink = document.querySelector(".tour-link");
-  const tourDrop = document.querySelector(".tour-drop");
+  const tourLink = document.querySelector(".shoram-link");
+  const tourDrop = document.querySelector(".shoram-drop");
 
   if (tourLink && tourDrop) {
     tourLink.addEventListener("click", function () {
@@ -304,3 +304,38 @@ document.addEventListener("DOMContentLoaded", () => {
   initServiceCard();
   initPremiumCursor();
 });
+
+
+
+
+// // Testing purpose
+
+// if(window.innerWidth < 992){
+
+// document.querySelectorAll('.dropdown-menu .col-lg-3').forEach(function(col){
+
+//     const title = col.querySelector('.dropdown-header');
+
+//     if(title){
+
+//         title.addEventListener('click',function(){
+
+//             document.querySelectorAll(
+//                 '.dropdown-menu .col-lg-3'
+//             ).forEach(function(other){
+
+//                 if(other !== col){
+//                     other.classList.remove('mobile-open');
+//                 }
+
+//             });
+
+//             col.classList.toggle('mobile-open');
+
+//         });
+
+//     }
+
+// });
+
+// }

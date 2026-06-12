@@ -1,103 +1,179 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Eyes Follow Cursor</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    body {
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: linear-gradient(135deg, #141e30, #243b55);
-      overflow: hidden;
-    }
+    <title>Counter Demo</title>
 
-    .face {
-      display: flex;
-      gap: 40px;
-    }
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    .eye {
-      width: 140px;
-      height: 140px;
-      background: #fff;
-      border-radius: 50%;
-      position: relative;
-      overflow: hidden;
-      box-shadow:
-        inset 0 0 20px rgba(0, 0, 0, 0.15),
-        0 10px 30px rgba(0, 0, 0, 0.3);
-    }
+    <!-- AOS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
-    .pupil {
-      width: 45px;
-      height: 45px;
-      background: #111;
-      border-radius: 50%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      transition: transform 0.05s linear;
-    }
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
 
-    .pupil::after {
-      content: "";
-      width: 14px;
-      height: 14px;
-      background: white;
-      border-radius: 50%;
-      position: absolute;
-      top: 8px;
-      left: 8px;
-    }
-  </style>
-  <body>
-    <div class="face">
-      <div class="eye">
-        <div class="pupil"></div>
-      </div>
+        body{
+            background:#f8f9fa;
+            font-family:Arial, sans-serif;
+        }
 
-      <div class="eye">
-        <div class="pupil"></div>
-      </div>
-    </div>
+        .counter-section{
+            padding:100px 0;
+        }
+
+        .counter-card{
+            background:#fff;
+            border-radius:20px;
+            padding:40px 25px;
+            text-align:center;
+            box-shadow:0 10px 30px rgba(0,0,0,.08);
+            transition:.3s;
+            height:100%;
+        }
+
+        .counter-card:hover{
+            transform:translateY(-8px);
+        }
+
+        .counter-number{
+            font-size:3rem;
+            font-weight:700;
+            color:#FB111A;
+            line-height:1;
+        }
+
+        .counter-title{
+            margin-top:12px;
+            font-size:1rem;
+            color:#555;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:60px;
+        }
+
+        .section-title h2{
+            font-size:2.2rem;
+            font-weight:700;
+        }
+
+        .section-title p{
+            color:#777;
+        }
+
+        @media(max-width:768px){
+
+            .counter-section{
+                padding:70px 0;
+            }
+
+            .counter-number{
+                font-size:2.3rem;
+            }
+
+            .counter-card{
+                padding:30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="counter-section">
+
+        <div class="container">
+
+            <div class="section-title" data-aos="fade-up">
+                <h2>Our Achievements</h2>
+                <p>Growing every day with trust and quality service.</p>
+            </div>
+
+            <div class="row g-4">
+
+                <div class="col-md-3 col-6">
+                    <div class="counter-card" data-aos="fade-up">
+                        <div
+                            class="counter-number purecounter"
+                            data-purecounter-start="0"
+                            data-purecounter-end="1500"
+                            data-purecounter-duration="2">
+                        </div>
+                        <div class="counter-title">
+                            Happy Clients
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-6">
+                    <div class="counter-card" data-aos="fade-up" data-aos-delay="100">
+                        <div
+                            class="counter-number purecounter"
+                            data-purecounter-start="0"
+                            data-purecounter-end="250"
+                            data-purecounter-duration="2">
+                        </div>
+                        <div class="counter-title">
+                            Projects Completed
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-6">
+                    <div class="counter-card" data-aos="fade-up" data-aos-delay="200">
+                        <div
+                            class="counter-number purecounter"
+                            data-purecounter-start="0"
+                            data-purecounter-end="98"
+                            data-purecounter-duration="2">
+                        </div>
+                        <div class="counter-title">
+                            Success Rate %
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-6">
+                    <div class="counter-card" data-aos="fade-up" data-aos-delay="300">
+                        <div
+                            class="counter-number purecounter"
+                            data-purecounter-start="0"
+                            data-purecounter-end="12"
+                            data-purecounter-duration="2">
+                        </div>
+                        <div class="counter-title">
+                            Years Experience
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- PureCounter -->
+    <script src="https://cdn.jsdelivr.net/npm/@srexi/purecounterjs/dist/purecounter_vanilla.js"></script>
+
+    <!-- AOS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
 
     <script>
-      const pupils = document.querySelectorAll(".pupil");
+        new PureCounter();
 
-      document.addEventListener("mousemove", (e) => {
-        pupils.forEach((pupil) => {
-          const eye = pupil.parentElement;
-          const rect = eye.getBoundingClientRect();
-
-          const eyeCenterX = rect.left + rect.width / 2;
-          const eyeCenterY = rect.top + rect.height / 2;
-
-          const angle = Math.atan2(
-            e.clientY - eyeCenterY,
-            e.clientX - eyeCenterX,
-          );
-
-          // Distance pupil can move
-          const radius = 30;
-
-          const x = Math.cos(angle) * radius;
-          const y = Math.sin(angle) * radius;
-
-          pupil.style.transform = `translate(calc(-50% + ${x}px), calc(-50% + ${y}px))`;
+        AOS.init({
+            duration:1000,
+            once:true
         });
-      });
     </script>
-  </body>
+
+</body>
 </html>
