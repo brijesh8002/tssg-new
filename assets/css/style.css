@@ -21,7 +21,7 @@
   --border-subtle: rgba(88, 35, 159, 0.35);
   --border-main: rgba(72, 176, 168, 0.35);
   --text-muted: #9090b0;
-  --badge-ecom: rgba(72, 176, 168, 0.15);
+  --badge-ecom: rgba(0, 255, 234, 0.15);
   --badge-travel: rgba(88, 35, 159, 0.20);
   --badge-blog: rgba(255, 160, 80, 0.15);
   --badge-portfolio: rgba(72, 140, 220, 0.15);
@@ -801,16 +801,13 @@ header.active {
 
 
 
-
-
-
 /* ================================Hero Seciton========================= */
 
 
 
 /* ================================Service Seciton Index Page========================= */
 .tssg-service-wrapper {
-  padding: 50px 0;
+  /* padding: 50px 0; */
   background: #030816;
   position: relative;
   overflow: hidden;
@@ -917,8 +914,8 @@ header.active {
 
 .tssg-slider-head {
   text-align: center;
-  margin-top: 80px;
-  margin-bottom: 50px;
+  /* margin-top: 80px;
+  margin-bottom: 50px; */
 }
 
 .tssg-slider-head h2 {
@@ -1439,8 +1436,7 @@ header.active {
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-
-  /* flex-wrap: wrap; */
+  flex-wrap: wrap;
 }
 
 /* left */
@@ -1618,7 +1614,7 @@ header.active {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 28px;
+  /* margin-bottom: 28px; */
 }
 
 .tssg-section-label .label-line {
@@ -1740,7 +1736,7 @@ header.active {
 .tssg-card-badge {
   position: absolute;
   top: 12px;
-  left: 12px;
+  right: 12px;
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 0.06em;
@@ -1757,9 +1753,9 @@ header.active {
 }
 
 .badge-travel {
-  background: var(--badge-travel);
-  color: #b07ef5;
-  border: 1px solid rgba(88, 35, 159, 0.4);
+  background: rgb(88 35 159);
+    color: #ffffff;
+    border: 1px solid rgb(109 0 255);
 }
 
 .badge-blog {
@@ -1800,6 +1796,10 @@ header.active {
   line-height: 1.6;
   flex: 1;
   margin-bottom: 16px;
+  display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .tssg-card-footer-row {
@@ -2614,6 +2614,8 @@ header.active {
     opacity:0;
     visibility:hidden;
 
+    scrollbar-width: none;
+
     transition:.3s ease;
     z-index:9999;
 }
@@ -3139,10 +3141,14 @@ header.active {
       display: grid;
       grid-template-columns: 1.1fr 1fr;
       transition: border-color var(--transition), box-shadow var(--transition);
+      padding: 20px;
+    width: 100%;
+    margin: 20px 0;
     }
     .blog-featured-card:hover {
       border-color: var(--main-color);
       box-shadow: 0 20px 60px rgba(72,176,168,0.12);
+          
     }
     .blog-featured-visual {
       position: relative;
@@ -3231,7 +3237,7 @@ header.active {
     .pill-ai      { background: rgba(100,220,160,0.15); color: #5ddb9e;          border: 1px solid rgba(100,220,160,0.4); }
 
     .blog-featured-info {
-      padding: 44px 44px 44px 40px;
+  
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -3833,7 +3839,7 @@ header.active {
     @media (max-width: 991px) {
       .blog-featured-card { grid-template-columns: 1fr; }
       .blog-featured-visual { min-height: 260px; }
-      .blog-featured-info { padding: 28px 28px 32px; }
+
       .blog-grid-wrap { grid-template-columns: 1fr; }
       .blog-sidebar { position: static; }
       .post-card-wide { grid-template-columns: 1fr; grid-column: span 2; }
@@ -3853,4 +3859,3137 @@ header.active {
 
 
 
+
+    /* TESTING PURPOSE */
+    /* TESTING PURPOSE */
+
+    /*=========================================
+        TSSG PREMIUM SERVICES
+=========================================*/
+
+.tssvc-section{
+    position:relative;
+    overflow:hidden;
+    padding:100px 0;
+    background:
+        radial-gradient(circle at top left,#5b2eff20 0%,transparent 40%),
+        radial-gradient(circle at bottom right,var(--main-color)18 0%,transparent 35%),
+        #070b17;
+}
+
+.tssvc-section::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    top:-180px;
+    left:-150px;
+    background:#6d35ff;
+    opacity:.08;
+    filter:blur(120px);
+}
+
+.tssvc-section::after{
+    content:"";
+    position:absolute;
+    width:400px;
+    height:400px;
+    bottom:-180px;
+    right:-140px;
+    background:var(--main-color);
+    opacity:.08;
+    filter:blur(120px);
+}
+
+
+/*==============================
+            Heading
+==============================*/
+
+.tssvc-subtitle{
+
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+
+    padding:8px 18px;
+
+    border-radius:50px;
+
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:2px;
+    text-transform:uppercase;
+
+    color:#76f6ff;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+}
+
+.tssvc-subtitle::before{
+
+    content:"";
+
+    width:8px;
+    height:8px;
+
+    border-radius:50%;
+
+    background:var(--main-color);
+
+    box-shadow:0 0 18px var(--main-color);
+
+}
+
+.tssvc-title{
+
+    color:#fff;
+
+    font-size:48px;
+    font-weight:800;
+    line-height:1.2;
+
+    margin-bottom:18px;
+
+}
+
+.tssvc-title span{
+
+    background:linear-gradient(90deg,var(--main-color),var(--primary-color));
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+}
+
+.tssvc-description{
+
+    max-width:700px;
+    margin:auto;
+
+    color:#b7bfd2;
+
+    line-height:1.9;
+
+    font-size:16px;
+
+}
+
+
+
+/*==============================
+            Card
+==============================*/
+
+.tssvc-card{
+
+    position:relative;
+
+    height:100%;
+
+    padding:15px;
+
+    border-radius:26px;
+
+    overflow:hidden;
+
+    background:
+    linear-gradient(180deg,
+    rgba(255,255,255,.08),
+    rgba(255,255,255,.03));
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(20px);
+
+    transition:.45s;
+
+    z-index:2;
+
+}
+
+
+/* Animated Border */
+
+.tssvc-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    padding:1px;
+
+    border-radius:26px;
+
+    background:
+    linear-gradient(140deg,
+    var(--main-color),
+    transparent,
+    var(--primary-color));
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+            mask-composite:exclude;
+
+    opacity:.35;
+
+    transition:.4s;
+
+}
+
+
+/* Glow */
+
+.tssvc-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+    height:170px;
+
+    border-radius:50%;
+
+    top:-80px;
+    right:-80px;
+
+    background:var(--main-color);
+
+    opacity:.10;
+
+    filter:blur(70px);
+
+    transition:.5s;
+
+}
+
+
+/* Hover */
+
+.tssvc-card:hover{
+
+    transform:translateY(-12px);
+
+    border-color:rgba(0,217,255,.35);
+
+    box-shadow:
+    0 20px 45px rgba(0,0,0,.45);
+
+}
+
+.tssvc-card:hover::before{
+
+    opacity:1;
+
+}
+
+.tssvc-card:hover::after{
+
+    opacity:.18;
+
+    transform:scale(1.2);
+
+}
+
+
+
+/*==============================
+          Top Area
+==============================*/
+
+.tssvc-card-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+
+
+/*==============================
+            Icon
+==============================*/
+
+.tssvc-icon{
+
+    width:68px;
+    height:68px;
+
+    border-radius:22px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    font-size:28px;
+
+    color:var(--main-color);
+
+    background:
+    linear-gradient(145deg,
+    rgba(0,228,255,.15),
+    rgba(123,97,255,.12));
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.45s;
+
+}
+
+.tssvc-icon i{
+
+    transition:.45s;
+
+}
+
+.tssvc-card:hover .tssvc-icon{
+
+    transform:rotate(-8deg) scale(1.08);
+
+    background:
+    linear-gradient(145deg,
+    var(--main-color),
+    var(--primary-color));
+
+    color:#fff;
+
+    box-shadow:
+    0 10px 30px rgba(0,217,255,.30);
+
+}
+
+.tssvc-card:hover .tssvc-icon i{
+
+    transform:scale(1.15);
+
+}
+
+
+
+/*==============================
+            Badge
+==============================*/
+
+.tssvc-badge{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    padding:7px 16px;
+
+    border-radius:50px;
+
+    font-size:12px;
+
+    font-weight:600;
+
+    color:#fff;
+
+    background:
+    linear-gradient(90deg,
+    var(--main-color),
+    var(--primary-color));
+
+    box-shadow:
+    0 10px 20px rgba(0,0,0,.25);
+
+}
+
+
+/*=========================================
+        CARD TITLE & DESCRIPTION
+=========================================*/
+
+.tssvc-card-title{
+
+    color:#ffffff;
+
+    font-size:24px;
+
+    font-weight:700;
+
+    margin-bottom:5px;
+
+    transition:.35s;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.tssvc-card:hover .tssvc-card-title{
+
+    color:var(--main-color);
+
+}
+
+.tssvc-card-text{
+    color:#a9b5cc;
+    font-size:15px;
+    line-height:1.9;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+
+/*=========================================
+            FEATURE TAGS
+=========================================*/
+
+.tssvc-features{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-bottom:15px;
+
+}
+
+.tssvc-features span{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:9px 16px;
+
+    border-radius:50px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+    color:#dce6ff;
+
+    background:rgba(255,255,255,.05);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.35s;
+
+}
+
+.tssvc-features span:hover{
+
+    color:#ffffff;
+
+    background:linear-gradient(135deg,var(--main-color),var(--primary-color));
+
+    border-color:transparent;
+
+    transform:translateY(-2px);
+
+}
+
+
+/*=========================================
+            BUTTON
+=========================================*/
+
+.tssvc-btn{
+
+    position:relative;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:14px;
+
+    text-decoration:none;
+
+    color:#ffffff;
+
+    font-weight:600;
+
+    font-size:15px;
+
+    transition:.35s;
+
+}
+
+.tssvc-btn i{
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:rgba(255,255,255,.07);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.4s;
+
+}
+
+.tssvc-btn:hover{
+
+    color:var(--main-color);
+
+}
+
+.tssvc-btn:hover i{
+
+    color:#ffffff;
+
+    background:linear-gradient(135deg,var(--main-color),var(--primary-color));
+
+    border-color:transparent;
+
+    transform:translateX(6px) rotate(45deg);
+
+}
+
+
+/*=========================================
+        SHINE ANIMATION
+=========================================*/
+
+.tssvc-card{
+
+    overflow:hidden;
+
+}
+
+.tssvc-card .tssvc-shine{
+
+    display:none;
+
+}
+
+.tssvc-card::selection{
+
+    background:transparent;
+
+}
+
+.tssvc-card:before{
+
+    z-index:1;
+
+}
+
+.tssvc-card>*{
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.tssvc-card:hover{
+
+    overflow:hidden;
+
+}
+
+.tssvc-card:hover::selection{
+
+    background:transparent;
+
+}
+
+.tssvc-card::marker{
+
+    display:none;
+
+}
+
+/* Moving Shine */
+
+.tssvc-card::after{
+
+    pointer-events:none;
+
+}
+
+.tssvc-card:hover{
+
+    background:
+    linear-gradient(180deg,
+    rgba(255,255,255,.10),
+    rgba(255,255,255,.04));
+
+}
+
+.tssvc-card:hover:before{
+
+    animation:tssvcBorderGlow 3s linear infinite;
+
+}
+
+@keyframes tssvcBorderGlow{
+
+    0%{
+
+        filter:hue-rotate(0deg);
+
+    }
+
+    100%{
+
+        filter:hue-rotate(360deg);
+
+    }
+
+}
+
+
+/* Shine Overlay */
+
+.tssvc-card .shine{
+
+    display:none;
+
+}
+
+.tssvc-card{
+
+    isolation:isolate;
+
+}
+
+.tssvc-card::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:-150%;
+
+    left:-70%;
+
+    width:45%;
+
+    height:350%;
+
+    background:
+    linear-gradient(
+        90deg,
+        transparent,
+        rgba(255,255,255,.12),
+        transparent
+    );
+
+    transform:rotate(25deg);
+
+    transition:1s;
+
+}
+
+.tssvc-card:hover::after{
+
+    left:160%;
+
+}
+
+
+/*=========================================
+        RESPONSIVE
+=========================================*/
+
+@media(max-width:1199px){
+
+    .tssvc-title{
+
+        font-size:42px;
+
+    }
+
+}
+
+@media(max-width:991px){
+
+    .tssvc-section{
+
+        padding:80px 0;
+
+    }
+
+    .tssvc-title{
+
+        font-size:36px;
+
+    }
+
+    .tssvc-card{
+
+        padding:24px;
+
+    }
+
+}
+
+@media(max-width:767px){
+
+    .tssvc-title{
+
+        font-size:30px;
+
+    }
+
+    .tssvc-description{
+
+        font-size:15px;
+
+    }
+
+    .tssvc-card-title{
+
+        font-size:21px;
+
+    }
+
+    .tssvc-card-text{
+
+        min-height:auto;
+
+    }
+
+    .tssvc-icon{
+
+        width:60px;
+
+        height:60px;
+
+        font-size:24px;
+
+    }
+
+}
+
+@media(max-width:575px){
+
+    .tssvc-section{
+
+        padding:60px 0;
+
+    }
+
+    .tssvc-title{
+
+        font-size:28px;
+
+    }
+
+    .tssvc-subtitle{
+
+        font-size:11px;
+
+        letter-spacing:1px;
+
+        padding:7px 15px;
+
+    }
+
+    .tssvc-card{
+
+        padding:22px;
+
+        border-radius:22px;
+
+    }
+
+    .tssvc-card-title{
+
+        font-size:20px;
+
+    }
+
+    .tssvc-btn{
+
+        font-size:14px;
+
+    }
+
+    .tssvc-btn i{
+
+        width:38px;
+
+        height:38px;
+
+    }
+
+}
+
+
+/*=========================================
+        SMOOTH TRANSITIONS
+=========================================*/
+
+.tssvc-card,
+.tssvc-card *,
+.tssvc-btn,
+.tssvc-icon,
+.tssvc-features span{
+
+    transition:all .35s ease;
+
+}
     
+
+
+    
+
+
+/* TEsting2 */
+
+
+
+.tsssrv-section{
+    background:var(--bg-dark);
+    position:relative;
+    overflow:hidden;
+}
+
+.tsssrv-section::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:rgba(72,176,168,.08);
+    filter:blur(130px);
+    top:-180px;
+    left:-120px;
+    border-radius:50%;
+}
+
+.tsssrv-section::after{
+    content:"";
+    position:absolute;
+    width:420px;
+    height:420px;
+    background:rgba(88,35,159,.12);
+    filter:blur(140px);
+    right:-150px;
+    bottom:-120px;
+    border-radius:50%;
+}
+
+/*========================
+ CARD
+=========================*/
+
+.tsssrv-card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-subtle);
+
+    border-radius:24px;
+
+    padding:45px;
+
+    box-shadow:var(--shadow-card);
+
+    transition:var(--transition);
+
+}
+
+.tsssrv-card:hover{
+
+    border-color:var(--border-main);
+
+    transform:translateY(-8px);
+
+}
+
+/*========================
+ HEADING
+=========================*/
+
+.tsssrv-heading span{
+
+    color:var(--main-color);
+
+    text-transform:uppercase;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+}
+
+.tsssrv-heading h2{
+
+    color:#fff;
+
+    font-size:42px;
+
+    font-weight:700;
+
+    margin:15px 0 20px;
+
+    line-height:1.2;
+
+}
+
+.tsssrv-heading h2 span{
+
+    background:linear-gradient(90deg,
+    var(--main-color),
+    var(--primary-color));
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+}
+
+.tsssrv-heading p{
+
+    color:var(--text-muted);
+
+    line-height:30px;
+
+    margin-bottom:40px;
+
+}
+
+/*=========================
+ LIST
+==========================*/
+
+.tsssrv-list{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:20px;
+
+}
+
+.tsssrv-item{
+
+    display:flex;
+
+    gap:20px;
+
+    align-items:flex-start;
+
+    background:rgba(255,255,255,.02);
+
+    border:1px solid rgba(255,255,255,.05);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    transition:.35s;
+
+}
+
+.tsssrv-item:hover{
+
+    transform:translateX(10px);
+
+    border-color:var(--border-main);
+
+    background:var(--bg-card-hover);
+
+}
+
+.tsssrv-number{
+
+    min-width:65px;
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:linear-gradient(135deg,
+    var(--main-color),
+    var(--primary-color));
+
+    color:#fff;
+
+    font-size:22px;
+
+    font-weight:700;
+
+}
+
+.tsssrv-content h5{
+
+    color:#fff;
+
+    margin-bottom:8px;
+
+    font-size:20px;
+
+    font-weight:600;
+
+}
+
+.tsssrv-content p{
+
+    margin:0;
+
+    color:var(--text-muted);
+
+    line-height:28px;
+
+}
+
+/*=========================
+ WHY CARD
+==========================*/
+
+.tsswhy-card{
+
+    background:var(--bg-card);
+
+    border-radius:24px;
+
+    border:1px solid var(--border-subtle);
+
+    padding:40px;
+
+    box-shadow:var(--shadow-card);
+
+    transition:.35s;
+
+}
+
+.tsswhy-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:var(--border-main);
+
+}
+
+.tsswhy-card span{
+
+    color:var(--main-color);
+
+    letter-spacing:2px;
+
+    text-transform:uppercase;
+
+    font-size:14px;
+
+    font-weight:700;
+
+}
+
+.tsswhy-card h2{
+
+    color:#fff;
+
+    margin:15px 0 30px;
+
+    font-size:38px;
+
+}
+
+.tsswhy-card h2 span{
+
+    background:linear-gradient(90deg,
+    var(--main-color),
+    var(--primary-color));
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+/*=========================
+ WHY LIST
+==========================*/
+
+.tsswhy-list{
+
+    padding:0;
+
+    margin:0;
+
+    list-style:none;
+
+}
+
+.tsswhy-list li{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+    color:#fff;
+
+    padding:16px 0;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
+
+    transition:.3s;
+
+}
+
+.tsswhy-list li:last-child{
+
+    border-bottom:none;
+
+}
+
+.tsswhy-list li:hover{
+
+    padding-left:12px;
+
+    color:var(--main-color);
+
+}
+
+.tsswhy-list i{
+
+    font-size:20px;
+
+    color:var(--main-color);
+
+}
+
+/*=========================
+ CTA CARD
+==========================*/
+
+.tsscta-card{
+
+    border-radius:24px;
+
+    padding:40px;
+
+    overflow:hidden;
+
+    position:relative;
+
+    background:linear-gradient(135deg,
+    var(--primary-color),
+    var(--main-color));
+
+    color:#fff;
+
+}
+
+.tsscta-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:260px;
+
+    height:260px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.08);
+
+    top:-120px;
+
+    right:-100px;
+
+}
+
+.tsscta-card span{
+
+    font-size:13px;
+
+    text-transform:uppercase;
+
+    letter-spacing:2px;
+
+    opacity:.8;
+
+}
+
+.tsscta-card h3{
+
+    margin:15px 0;
+
+    font-size:34px;
+
+    font-weight:700;
+
+}
+
+.tsscta-card p{
+
+    line-height:30px;
+
+    opacity:.92;
+
+    margin-bottom:35px;
+    color: white;
+
+}
+
+.tsscta-btn{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    background:#fff;
+
+    color:var(--primary-color);
+
+    padding:15px 34px;
+
+    border-radius:50px;
+
+    font-weight:700;
+
+    transition:.35s;
+
+}
+
+.tsscta-btn:hover{
+
+    transform:translateY(-5px);
+
+    color:#fff;
+
+    background:#111;
+
+}
+
+/*=========================
+ RESPONSIVE
+==========================*/
+
+@media(max-width:991px){
+
+.tsssrv-card,
+.tsswhy-card,
+.tsscta-card{
+
+padding:30px;
+
+}
+
+.tsssrv-heading h2{
+
+font-size:34px;
+
+}
+
+.tsswhy-card h2{
+
+font-size:32px;
+
+}
+
+}
+
+@media(max-width:767px){
+
+.tsssrv-item{
+
+flex-direction:column;
+
+}
+
+.tsssrv-number{
+
+width:58px;
+height:58px;
+min-width:58px;
+
+}
+
+.tsssrv-heading h2{
+
+font-size:28px;
+
+}
+
+.tsswhy-card h2{
+
+font-size:28px;
+
+}
+
+.tsscta-card h3{
+
+font-size:28px;
+
+}
+
+.tsscta-btn{
+
+width:100%;
+
+}
+
+}
+
+
+
+/*==========================================
+    PART 3C
+==========================================*/
+
+/*==============================
+        PROCESS SECTION
+===============================*/
+
+.tssprocess-section{
+    background:var(--bg-dark);
+    position:relative;
+    overflow:hidden;
+}
+
+.tssprocess-section::before{
+    content:"";
+    position:absolute;
+    width:500px;
+    height:500px;
+    background:rgba(72,176,168,.08);
+    filter:blur(150px);
+    top:-180px;
+    left:-180px;
+    border-radius:50%;
+}
+
+.tssprocess-section::after{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:rgba(88,35,159,.12);
+    filter:blur(150px);
+    right:-150px;
+    bottom:-180px;
+    border-radius:50%;
+}
+
+/*==============================
+    Heading
+===============================*/
+
+.tssprocess-subtitle{
+
+    display:inline-block;
+
+    color:var(--main-color);
+
+    text-transform:uppercase;
+
+    font-weight:700;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+
+}
+
+.tssprocess-title{
+
+    color:#fff;
+
+    font-size:48px;
+
+    font-weight:700;
+
+    margin-bottom:20px;
+
+}
+
+.tssprocess-title span{
+
+    background:linear-gradient(90deg,
+    var(--main-color),
+    var(--primary-color));
+
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+
+}
+
+.tssprocess-desc{
+
+    color:var(--text-muted);
+
+    max-width:760px;
+
+    margin:auto;
+
+    line-height:32px;
+
+    margin-bottom:70px;
+
+}
+
+/*==============================
+ Timeline
+===============================*/
+
+.tssprocess-wrapper{
+
+    position:relative;
+
+    max-width:900px;
+
+    margin:auto;
+
+    padding-left:70px;
+
+}
+
+.tssprocess-wrapper::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:28px;
+
+    top:0;
+
+    bottom:0;
+
+    width:3px;
+
+    background:linear-gradient(to bottom,
+    var(--main-color),
+    var(--primary-color));
+
+}
+
+/*==============================
+ Process Item
+===============================*/
+
+.tssprocess-item{
+
+    position:relative;
+
+    display:flex;
+
+    gap:25px;
+
+    margin-bottom:45px;
+
+}
+
+.tssprocess-item:last-child{
+
+    margin-bottom:0;
+
+}
+
+/*==============================
+ Icon
+===============================*/
+
+.tssprocess-icon{
+
+    width:58px;
+
+    height:58px;
+
+    min-width:58px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    color:#fff;
+
+    font-size:22px;
+
+    position:relative;
+
+    z-index:5;
+
+    background:linear-gradient(135deg,
+    var(--main-color),
+    var(--primary-color));
+
+    box-shadow:0 0 25px rgba(72,176,168,.35);
+
+}
+
+.tssprocess-icon::after{
+
+    content:"";
+
+    position:absolute;
+
+    width:74px;
+
+    height:74px;
+
+    border-radius:50%;
+
+    border:2px solid rgba(72,176,168,.20);
+
+}
+
+/*==============================
+ Content Card
+===============================*/
+
+.tssprocess-content{
+
+    flex:1;
+
+    background:var(--bg-card);
+
+    border-radius:20px;
+
+    padding:30px;
+
+    border:1px solid var(--border-subtle);
+
+    transition:.35s;
+
+}
+
+.tssprocess-content:hover{
+
+    transform:translateY(-8px);
+
+    background:var(--bg-card-hover);
+
+    border-color:var(--border-main);
+
+    box-shadow:0 18px 40px rgba(72,176,168,.18);
+
+}
+
+.tssprocess-content span{
+
+    color:var(--main-color);
+
+    font-size:13px;
+
+    letter-spacing:2px;
+
+    font-weight:700;
+
+}
+
+.tssprocess-content h4{
+
+    color:#fff;
+
+    margin:12px 0;
+
+    font-size:24px;
+
+}
+
+.tssprocess-content p{
+
+    color:var(--text-muted);
+
+    margin:0;
+
+    line-height:30px;
+
+}
+
+/*==============================
+ Statistics
+===============================*/
+
+.tssstats-section{
+
+    background:var(--bg-dark);
+
+}
+
+.tssstats-card{
+
+    height:100%;
+
+    text-align:center;
+
+    padding:45px 25px;
+
+    background:var(--bg-card);
+
+    border-radius:22px;
+
+    border:1px solid var(--border-subtle);
+
+    transition:.35s;
+
+    overflow:hidden;
+
+    position:relative;
+
+}
+
+.tssstats-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:170px;
+
+    height:170px;
+
+    background:rgba(72,176,168,.06);
+
+    border-radius:50%;
+
+    top:-90px;
+
+    right:-80px;
+
+}
+
+.tssstats-card:hover{
+
+    transform:translateY(-10px);
+
+    background:var(--bg-card-hover);
+
+    border-color:var(--border-main);
+
+    box-shadow:0 20px 45px rgba(72,176,168,.18);
+
+}
+
+.tssstats-card h2{
+
+    font-size:52px;
+
+    font-weight:700;
+
+    margin-bottom:12px;
+
+    background:linear-gradient(90deg,
+    var(--main-color),
+    var(--primary-color));
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+.tssstats-card h6{
+
+    color:#fff;
+
+    font-size:20px;
+
+    margin-bottom:15px;
+
+}
+
+.tssstats-card p{
+
+    color:var(--text-muted);
+
+    line-height:28px;
+
+    margin:0;
+
+}
+
+/*==============================
+ Responsive
+===============================*/
+
+@media(max-width:991px){
+
+.tssprocess-title{
+
+font-size:38px;
+
+}
+
+.tssprocess-wrapper{
+
+padding-left:50px;
+
+}
+
+.tssprocess-content{
+
+padding:24px;
+
+}
+
+}
+
+@media(max-width:767px){
+
+.tssprocess-title{
+
+font-size:30px;
+
+}
+
+.tssprocess-wrapper{
+
+padding-left:0;
+
+}
+
+.tssprocess-wrapper::before{
+
+left:28px;
+
+}
+
+.tssprocess-item{
+
+gap:18px;
+
+}
+
+.tssprocess-content{
+
+padding:20px;
+
+}
+
+.tssprocess-content h4{
+
+font-size:20px;
+
+}
+
+.tssstats-card{
+
+padding:35px 20px;
+
+}
+
+.tssstats-card h2{
+
+font-size:42px;
+
+}
+
+}
+/* TEsting2 *
+
+/* Testing 3 */
+/*=========================================
+        WHY JOIN TSSG
+==========================================*/
+
+.tss-join-section{
+
+    padding:100px 0;
+
+    background:var(--bg-dark);
+
+}
+
+.tss-section-title{
+
+    font-size:48px;
+
+    font-family:var(--font-display);
+
+    color:#fff;
+
+    margin-bottom:20px;
+
+}
+
+.tss-section-title span{
+
+    color:var(--main-color);
+
+}
+
+.tss-section-desc{
+
+    color:var(--text-muted);
+
+    line-height:30px;
+
+    margin-bottom:35px;
+
+}
+
+.tss-join-image{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:24px;
+
+}
+
+.tss-join-image img{
+
+    width:100%;
+
+    border-radius:24px;
+
+    transition:.5s;
+
+}
+
+.tss-join-image:hover img{
+
+    transform:scale(1.05);
+
+}
+
+.tss-exp-card{
+
+    position:absolute;
+
+    bottom:30px;
+
+    left:30px;
+
+    background:rgba(18,18,42,.92);
+
+    backdrop-filter:blur(18px);
+
+    border:1px solid var(--border-main);
+
+    padding:22px 28px;
+
+    border-radius:18px;
+
+}
+
+.tss-exp-card h3{
+
+    color:var(--main-color);
+
+    font-size:36px;
+
+    margin-bottom:5px;
+
+}
+
+.tss-exp-card span{
+
+    color:#fff;
+
+}
+
+.tss-feature-card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-subtle);
+
+    border-radius:18px;
+
+    padding:30px;
+
+    height:100%;
+
+    transition:var(--transition);
+
+}
+
+.tss-feature-card:hover{
+
+    transform:translateY(-8px);
+
+    background:var(--bg-card-hover);
+
+    border-color:var(--border-main);
+
+}
+
+.tss-feature-icon{
+
+    width:70px;
+
+    height:70px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,var(--main-color),var(--primary-color));
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-bottom:20px;
+
+}
+
+.tss-feature-icon i{
+
+    color:#fff;
+
+    font-size:30px;
+
+}
+
+.tss-feature-card h5{
+
+    color:#fff;
+
+    margin-bottom:12px;
+
+}
+
+.tss-feature-card p{
+
+    color:var(--text-muted);
+
+    line-height:28px;
+
+}
+
+@media(max-width:991px){
+
+.tss-section-title{
+
+font-size:36px;
+
+}
+
+.tss-join-image{
+
+margin-bottom:40px;
+
+}
+
+}
+
+@media(max-width:576px){
+
+.tss-section-title{
+
+font-size:30px;
+
+}
+
+.tss-feature-card{
+
+padding:25px;
+
+}
+
+.tss-exp-card{
+
+left:20px;
+
+bottom:20px;
+
+padding:18px;
+
+}
+
+}
+
+/*=========================================
+        LIFE AT TSSG
+==========================================*/
+
+.tss-life-section{
+
+    background:var(--bg-dark);
+
+    padding:100px 0;
+
+}
+
+.tss-life-large,
+.tss-life-small{
+
+    position:relative;
+
+    overflow:hidden;
+
+    border-radius:22px;
+
+    border:1px solid var(--border-subtle);
+
+    box-shadow:var(--shadow-card);
+
+}
+
+.tss-life-large{
+
+    height:100%;
+
+    min-height:620px;
+
+}
+
+.tss-life-small{
+
+    height:300px;
+
+}
+
+.tss-life-large img,
+.tss-life-small img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.6s;
+
+}
+
+.tss-life-large:hover img,
+.tss-life-small:hover img{
+
+    transform:scale(1.1);
+
+}
+
+.tss-life-overlay{
+
+    position:absolute;
+
+    left:0;
+
+    right:0;
+
+    bottom:0;
+
+    padding:30px;
+
+    background:linear-gradient(to top,
+    rgba(11,11,26,.95),
+    transparent);
+
+}
+
+.tss-life-overlay h4,
+.tss-life-overlay h5{
+
+    color:#fff;
+
+    margin-bottom:8px;
+
+}
+
+.tss-life-overlay p{
+
+    color:#d7d7d7;
+
+    margin:0;
+
+}
+
+.tss-culture-card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-subtle);
+
+    border-radius:20px;
+
+    padding:35px;
+
+    text-align:center;
+
+    transition:var(--transition);
+
+    height:100%;
+
+}
+
+.tss-culture-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:var(--border-main);
+
+    background:var(--bg-card-hover);
+
+}
+
+.tss-culture-card i{
+
+    width:75px;
+
+    height:75px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin:auto;
+
+    margin-bottom:20px;
+
+    border-radius:18px;
+
+    background:linear-gradient(
+    135deg,
+    var(--main-color),
+    var(--primary-color));
+
+    color:#fff;
+
+    font-size:32px;
+
+}
+
+.tss-culture-card h4{
+
+    margin-bottom:15px;
+
+    color:#fff;
+
+}
+
+.tss-culture-card p{
+
+    color:var(--text-muted);
+
+}
+
+@media(max-width:991px){
+
+.tss-life-large{
+
+min-height:450px;
+
+margin-bottom:25px;
+
+}
+
+.tss-life-small{
+
+height:220px;
+
+}
+
+}
+
+@media(max-width:767px){
+
+.tss-life-section{
+
+padding:70px 0;
+
+}
+
+.tss-life-large{
+
+min-height:320px;
+
+}
+
+.tss-life-small{
+
+height:180px;
+
+}
+
+.tss-life-overlay{
+
+padding:20px;
+
+}
+
+.tss-culture-card{
+
+padding:28px;
+
+}
+
+}
+
+
+/*=========================================
+        EMPLOYEE BENEFITS
+==========================================*/
+
+.tss-benefits-section{
+
+    padding:100px 0;
+
+    background:var(--bg-dark);
+
+}
+
+.tss-benefit-card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-subtle);
+
+    border-radius:20px;
+
+    padding:35px 28px;
+
+    text-align:center;
+
+    height:100%;
+
+    position:relative;
+
+    overflow:hidden;
+
+    transition:var(--transition);
+
+}
+
+.tss-benefit-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+    135deg,
+    rgba(72,176,168,.06),
+    rgba(88,35,159,.08));
+
+    opacity:0;
+
+    transition:var(--transition);
+
+}
+
+.tss-benefit-card:hover{
+
+    transform:translateY(-10px);
+
+    background:var(--bg-card-hover);
+
+    border-color:var(--border-main);
+
+    box-shadow:var(--shadow-card);
+
+}
+
+.tss-benefit-card:hover::before{
+
+    opacity:1;
+
+}
+
+.tss-benefit-icon{
+
+    width:85px;
+
+    height:85px;
+
+    border-radius:22px;
+
+    margin:0 auto 25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:linear-gradient(
+    135deg,
+    var(--main-color),
+    var(--primary-color));
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.tss-benefit-icon i{
+
+    color:#fff;
+
+    font-size:34px;
+
+}
+
+.tss-benefit-card h4{
+
+    color:#fff;
+
+    font-size:22px;
+
+    margin-bottom:15px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.tss-benefit-card p{
+
+    color:var(--text-muted);
+
+    line-height:30px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/*============================
+      Responsive
+=============================*/
+
+@media(max-width:991px){
+
+.tss-benefits-section{
+
+padding:80px 0;
+
+}
+
+}
+
+@media(max-width:767px){
+
+.tss-benefits-section{
+
+padding:70px 0;
+
+}
+
+.tss-benefit-card{
+
+padding:30px 22px;
+
+}
+
+.tss-benefit-icon{
+
+width:70px;
+
+height:70px;
+
+}
+
+.tss-benefit-icon i{
+
+font-size:28px;
+
+}
+
+}
+
+/*=========================================
+        JOB OPENINGS
+==========================================*/
+
+.tss-jobs-section{
+
+    background:var(--bg-dark);
+
+    padding:100px 0;
+
+}
+
+.tss-job-card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-subtle);
+
+    border-radius:20px;
+
+    padding:35px;
+
+    transition:var(--transition);
+
+    height:100%;
+
+}
+
+.tss-job-card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:var(--main-color);
+
+    background:var(--bg-card-hover);
+
+    box-shadow:var(--shadow-card);
+
+}
+
+.tss-job-top{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:25px;
+
+}
+
+.tss-job-badge{
+
+    background:rgba(72,176,168,.15);
+
+    color:var(--main-color);
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    font-size:13px;
+
+    font-weight:600;
+
+}
+
+.tss-job-date{
+
+    color:#fff;
+
+    font-size:13px;
+
+    background:var(--primary-color);
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+}
+
+.tss-job-card h3{
+
+    color:#fff;
+
+    margin-bottom:15px;
+
+}
+
+.tss-job-card p{
+
+    color:var(--text-muted);
+
+    margin-bottom:25px;
+
+}
+
+.tss-job-info{
+
+    list-style:none;
+
+    padding:0;
+
+    margin-bottom:30px;
+
+}
+
+.tss-job-info li{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#ddd;
+
+    margin-bottom:12px;
+
+}
+
+.tss-job-info i{
+
+    color:var(--main-color);
+
+}
+
+.tss-job-btn{
+
+    display:inline-block;
+
+    padding:14px 32px;
+
+    background:linear-gradient(
+    135deg,
+    var(--main-color),
+    var(--primary-color));
+
+    color:#fff;
+
+    border-radius:50px;
+
+    font-weight:600;
+
+    transition:.3s;
+
+}
+
+.tss-job-btn:hover{
+
+    color:#fff;
+
+    transform:translateY(-3px);
+
+}
+
+@media(max-width:767px){
+
+.tss-job-card{
+
+padding:25px;
+
+}
+
+.tss-job-top{
+
+flex-direction:column;
+
+align-items:flex-start;
+
+gap:12px;
+
+}
+
+.tss-job-btn{
+
+width:100%;
+
+text-align:center;
+
+}
+
+}
+
+
+/*=========================================
+        HIRING PROCESS
+==========================================*/
+
+.tss-process-section{
+
+    padding:100px 0;
+
+    background:var(--bg-dark);
+
+}
+
+.tss-process-wrapper{
+
+    position:relative;
+
+    display:grid;
+
+    grid-template-columns:repeat(6,1fr);
+
+    gap:30px;
+
+}
+
+.tss-process-line{
+
+    position:absolute;
+
+    top:42px;
+
+    left:8%;
+
+    width:84%;
+
+    height:4px;
+
+    background:linear-gradient(
+    90deg,
+    var(--main-color),
+    var(--primary-color));
+
+    z-index:0;
+
+}
+
+.tss-process-item{
+
+    position:relative;
+
+    text-align:center;
+
+    z-index:2;
+
+}
+
+.tss-process-icon{
+
+    width:85px;
+
+    height:85px;
+
+    margin:0 auto 20px;
+
+    border-radius:50%;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    background:linear-gradient(
+    135deg,
+    var(--main-color),
+    var(--primary-color));
+
+    color:#fff;
+
+    font-size:32px;
+
+    box-shadow:0 15px 35px rgba(72,176,168,.25);
+
+    transition:var(--transition);
+
+}
+
+.tss-process-item:hover .tss-process-icon{
+
+    transform:translateY(-8px) scale(1.08);
+
+}
+
+.tss-process-item h4{
+
+    color:#fff;
+
+    margin-bottom:12px;
+
+    font-size:22px;
+
+}
+
+.tss-process-item p{
+
+    color:var(--text-muted);
+
+    font-size:15px;
+
+    line-height:28px;
+
+}
+
+/*==========================
+        Tablet
+==========================*/
+
+@media(max-width:991px){
+
+.tss-process-wrapper{
+
+grid-template-columns:repeat(3,1fr);
+
+row-gap:50px;
+
+}
+
+.tss-process-line{
+
+display:none;
+
+}
+
+}
+
+/*==========================
+        Mobile
+==========================*/
+
+@media(max-width:767px){
+
+.tss-process-wrapper{
+
+grid-template-columns:1fr;
+
+gap:35px;
+
+}
+
+.tss-process-item{
+
+text-align:left;
+
+padding-left:100px;
+
+position:relative;
+
+}
+
+.tss-process-icon{
+
+position:absolute;
+
+left:0;
+
+top:0;
+
+margin:0;
+
+width:70px;
+
+height:70px;
+
+font-size:26px;
+
+}
+
+.tss-process-item::before{
+
+content:"";
+
+position:absolute;
+
+left:34px;
+
+top:70px;
+
+width:3px;
+
+height:calc(100% + 10px);
+
+background:linear-gradient(
+180deg,
+var(--main-color),
+var(--primary-color));
+
+}
+
+.tss-process-item:last-child::before{
+
+display:none;
+
+}
+
+}
+
+/*=========================================
+        TESTIMONIALS
+==========================================*/
+
+.tss-testimonial-section{
+
+    padding:100px 0;
+
+    background:var(--bg-dark);
+
+}
+
+.tss-testimonial-card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-subtle);
+
+    border-radius:22px;
+
+    padding:35px;
+
+    height:100%;
+
+    transition:var(--transition);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.tss-testimonial-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:linear-gradient(
+    90deg,
+    var(--main-color),
+    var(--primary-color));
+
+}
+
+.tss-testimonial-card:hover{
+
+    transform:translateY(-10px);
+
+    background:var(--bg-card-hover);
+
+    border-color:var(--border-main);
+
+    box-shadow:var(--shadow-card);
+
+}
+
+.tss-stars{
+
+    color:#FFD43B;
+
+    font-size:20px;
+
+    margin-bottom:20px;
+
+    letter-spacing:3px;
+
+}
+
+.tss-testimonial-card p{
+
+    color:var(--text-muted);
+
+    line-height:30px;
+
+    margin-bottom:30px;
+
+}
+
+.tss-user{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:15px;
+
+}
+
+.tss-user img{
+
+    width:65px;
+
+    height:65px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:3px solid var(--main-color);
+
+}
+
+.tss-user h5{
+
+    color:#fff;
+
+    margin-bottom:5px;
+
+}
+
+.tss-user span{
+
+    color:var(--text-muted);
+
+    font-size:14px;
+
+}
+
+/*==========================
+        Responsive
+==========================*/
+
+@media(max-width:991px){
+
+.tss-testimonial-section{
+
+padding:80px 0;
+
+}
+
+}
+
+@media(max-width:767px){
+
+.tss-testimonial-section{
+
+padding:70px 0;
+
+}
+
+.tss-testimonial-card{
+
+padding:25px;
+
+}
+
+.tss-user img{
+
+width:55px;
+
+height:55px;
+
+}
+
+.tss-stars{
+
+font-size:18px;
+
+}
+
+}
+
+
+/*=========================================
+        COMPANY STATISTICS
+==========================================*/
+
+.tss-stats-section{
+
+    padding:100px 0;
+
+    background:var(--bg-dark);
+
+}
+
+.tss-stat-card{
+
+    background:var(--bg-card);
+
+    border:1px solid var(--border-subtle);
+
+    border-radius:22px;
+
+    padding:40px 30px;
+
+    text-align:center;
+
+    height:100%;
+
+    transition:var(--transition);
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.tss-stat-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    background:linear-gradient(
+    135deg,
+    rgba(72,176,168,.08),
+    rgba(88,35,159,.08));
+
+    opacity:0;
+
+    transition:var(--transition);
+
+}
+
+.tss-stat-card:hover{
+
+    transform:translateY(-10px);
+
+    border-color:var(--border-main);
+
+    background:var(--bg-card-hover);
+
+    box-shadow:var(--shadow-card);
+
+}
+
+.tss-stat-card:hover::before{
+
+    opacity:1;
+
+}
+
+.tss-stat-icon{
+
+    width:85px;
+
+    height:85px;
+
+    margin:0 auto 25px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:20px;
+
+    background:linear-gradient(
+    135deg,
+    var(--main-color),
+    var(--primary-color));
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.tss-stat-icon i{
+
+    color:#fff;
+
+    font-size:34px;
+
+}
+
+.tss-stat-card h2{
+
+    color:var(--main-color);
+
+    font-size:52px;
+
+    font-weight:700;
+
+    margin-bottom:10px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.tss-stat-card h5{
+
+    color:#fff;
+
+    margin-bottom:15px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+.tss-stat-card p{
+
+    color:var(--text-muted);
+
+    line-height:28px;
+
+    position:relative;
+
+    z-index:2;
+
+}
+
+/*==========================
+        Responsive
+==========================*/
+
+@media(max-width:991px){
+
+.tss-stats-section{
+
+padding:80px 0;
+
+}
+
+}
+
+@media(max-width:767px){
+
+.tss-stats-section{
+
+padding:70px 0;
+
+}
+
+.tss-stat-card{
+
+padding:30px 20px;
+
+}
+
+.tss-stat-icon{
+
+width:70px;
+
+height:70px;
+
+}
+
+.tss-stat-icon i{
+
+font-size:28px;
+
+}
+
+.tss-stat-card h2{
+
+font-size:40px;
+
+}
+
+}
+/* Testing 3 */

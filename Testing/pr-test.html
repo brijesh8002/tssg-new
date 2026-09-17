@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+
+<style>
+    /*==================================================
+                GOOGLE FONT
+==================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+
+/*==================================================
+                ROOT
+==================================================*/
+
+:root{
+
+    --ts-dark:#070b14;
+    --ts-card:#0d1321;
+    --ts-card2:#101826;
+
+    --ts-border:rgba(255,255,255,.08);
+
+    --ts-text:#ffffff;
+    --ts-muted:#b6bfd1;
+
+    --ts-orange:#ff8a00;
+    --ts-orange2:#ff5e00;
+
+}
+
+
+/*==================================================
+                SECTION
+==================================================*/
+
+.tsProjectsSection{
+
+    background:
+    radial-gradient(circle at top left,#2a1705 0%,transparent 35%),
+    radial-gradient(circle at right,#1d102d 0%,transparent 30%),
+    #050913;
+
+    min-height:100vh;
+
+    font-family:'Inter',sans-serif;
+
+    overflow:hidden;
+
+}
+
+
+/*==================================================
+                TITLE
+==================================================*/
+
+.tsProjectMiniTitle{
+
+    color:#ff9832;
+
+    letter-spacing:3px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+}
+
+
+.tsProjectMainTitle{
+
+    color:#fff;
+
+    font-size:72px;
+
+    font-weight:900;
+
+    line-height:1;
+
+    margin-top:10px;
+
+}
+
+
+.tsProjectMainTitle span{
+
+    background:linear-gradient(90deg,#ffb347,#ff6400);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+.tsProjectText{
+
+    color:#c9d1e4;
+
+    font-size:18px;
+
+    margin-top:18px;
+
+}
+
+
+/*==================================================
+                CARD
+==================================================*/
+
+.tsProjectCard{
+
+    background:linear-gradient(180deg,#101826,#0b111d);
+
+    border-radius:26px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.45s;
+
+    position:relative;
+
+    box-shadow:
+
+    0 15px 45px rgba(0,0,0,.45);
+
+}
+
+
+/* glow */
+
+.tsProjectCard::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:26px;
+
+    padding:1px;
+
+    background:
+
+    linear-gradient(180deg,
+
+    rgba(255,255,255,.15),
+
+    rgba(255,255,255,0));
+
+    -webkit-mask:
+
+    linear-gradient(#fff 0 0) content-box,
+
+    linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+            mask-composite:exclude;
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+                HOVER
+==================================================*/
+
+.tsProjectCard:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:
+
+    0 35px 70px rgba(0,0,0,.55);
+
+}
+
+
+/*==================================================
+                IMAGE
+==================================================*/
+
+.tsProjectImageBox{
+
+    position:relative;
+
+    overflow:hidden;
+
+    aspect-ratio:16/10;
+
+    background:#111;
+
+}
+
+
+.tsProjectImageBox img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.8s;
+
+}
+
+
+.tsProjectCard:hover img{
+
+    transform:scale(1.06);
+
+}
+
+
+/*==================================================
+                CONTENT
+==================================================*/
+
+.tsProjectContent{
+
+    padding:26px;
+
+}
+
+
+/*==================================================
+                ICON
+==================================================*/
+
+.tsProjectIcon{
+
+    width:62px;
+
+    height:62px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(180deg,
+
+    #ff9736,
+
+    #ff5d00);
+
+    box-shadow:
+
+    0 12px 30px rgba(255,122,0,.35);
+
+}
+
+
+/*==================================================
+                TITLE
+==================================================*/
+
+.tsProjectName{
+
+    color:#fff;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:2px;
+
+}
+
+
+.tsProjectCategory{
+
+    color:#ff8a00;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+
+/*==================================================
+                DESCRIPTION
+==================================================*/
+
+.tsProjectDescription{
+
+    margin-top:24px;
+
+    color:#b9c3d4;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+
+/*==================================================
+                TAGS
+==================================================*/
+
+.tsProjectTags{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:24px;
+
+}
+
+
+.tsProjectTags span{
+
+    background:#111927;
+
+    color:#e9edf6;
+
+    padding:8px 16px;
+
+    border-radius:50px;
+
+    font-size:13px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    transition:.3s;
+
+}
+
+
+.tsProjectTags span:hover{
+
+    transform:translateY(-3px);
+
+    background:#1b2434;
+
+}
+
+
+/*==================================================
+                BUTTONS
+==================================================*/
+
+.tsLiveBtn{
+
+    height:54px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-weight:600;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    transition:.35s;
+
+}
+
+
+.tsLiveBtn i{
+
+    margin-right:10px;
+
+}
+
+
+.tsLiveBtn:hover{
+
+    background:#151d2b;
+
+    color:#fff;
+
+}
+
+
+.tsDetailsBtn{
+
+    height:54px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-weight:700;
+
+    background:
+
+    linear-gradient(90deg,#ff8d1d,#ff6200);
+
+    transition:.35s;
+
+}
+
+
+.tsDetailsBtn i{
+
+    margin-left:10px;
+
+}
+
+
+.tsDetailsBtn:hover{
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+    0 12px 30px rgba(255,115,0,.35);
+
+}
+
+
+/*==================================================
+                ORANGE THEME
+==================================================*/
+
+.tsOrangeCard .tsProjectIcon{
+
+    background:
+
+    linear-gradient(180deg,#ff9833,#ff5d00);
+
+}
+
+
+.tsOrangeCard .tsProjectCategory{
+
+    color:#ff8a00;
+
+}
+
+
+.tsOrangeCard .tsDetailsBtn{
+
+    background:
+
+    linear-gradient(90deg,#ff9733,#ff6200);
+
+}
+
+
+/*==================================================
+                GOOGLE FONT
+==================================================*/
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+
+/*==================================================
+                ROOT
+==================================================*/
+
+:root{
+
+    --ts-dark:#070b14;
+    --ts-card:#0d1321;
+    --ts-card2:#101826;
+
+    --ts-border:rgba(255,255,255,.08);
+
+    --ts-text:#ffffff;
+    --ts-muted:#b6bfd1;
+
+    --ts-orange:#ff8a00;
+    --ts-orange2:#ff5e00;
+
+}
+
+
+/*==================================================
+                SECTION
+==================================================*/
+
+.tsProjectsSection{
+
+    background:
+    radial-gradient(circle at top left,#2a1705 0%,transparent 35%),
+    radial-gradient(circle at right,#1d102d 0%,transparent 30%),
+    #050913;
+
+    min-height:100vh;
+
+    font-family:'Inter',sans-serif;
+
+    overflow:hidden;
+
+}
+
+
+/*==================================================
+                TITLE
+==================================================*/
+
+.tsProjectMiniTitle{
+
+    color:#ff9832;
+
+    letter-spacing:3px;
+
+    font-size:14px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+}
+
+
+.tsProjectMainTitle{
+
+    color:#fff;
+
+    font-size:72px;
+
+    font-weight:900;
+
+    line-height:1;
+
+    margin-top:10px;
+
+}
+
+
+.tsProjectMainTitle span{
+
+    background:linear-gradient(90deg,#ffb347,#ff6400);
+
+    -webkit-background-clip:text;
+
+    -webkit-text-fill-color:transparent;
+
+}
+
+
+.tsProjectText{
+
+    color:#c9d1e4;
+
+    font-size:18px;
+
+    margin-top:18px;
+
+}
+
+
+/*==================================================
+                CARD
+==================================================*/
+
+.tsProjectCard{
+
+    background:linear-gradient(180deg,#101826,#0b111d);
+
+    border-radius:26px;
+
+    overflow:hidden;
+
+    border:1px solid rgba(255,255,255,.08);
+
+    transition:.45s;
+
+    position:relative;
+
+    box-shadow:
+
+    0 15px 45px rgba(0,0,0,.45);
+
+}
+
+
+/* glow */
+
+.tsProjectCard::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    border-radius:26px;
+
+    padding:1px;
+
+    background:
+
+    linear-gradient(180deg,
+
+    rgba(255,255,255,.15),
+
+    rgba(255,255,255,0));
+
+    -webkit-mask:
+
+    linear-gradient(#fff 0 0) content-box,
+
+    linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite:xor;
+
+            mask-composite:exclude;
+
+    pointer-events:none;
+
+}
+
+
+/*==================================================
+                HOVER
+==================================================*/
+
+.tsProjectCard:hover{
+
+    transform:translateY(-10px);
+
+    box-shadow:
+
+    0 35px 70px rgba(0,0,0,.55);
+
+}
+
+
+/*==================================================
+                IMAGE
+==================================================*/
+
+.tsProjectImageBox{
+
+    position:relative;
+
+    overflow:hidden;
+
+    aspect-ratio:16/10;
+
+    background:#111;
+
+}
+
+
+.tsProjectImageBox img{
+
+    width:100%;
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.8s;
+
+}
+
+
+.tsProjectCard:hover img{
+
+    transform:scale(1.06);
+
+}
+
+
+/*==================================================
+                CONTENT
+==================================================*/
+
+.tsProjectContent{
+
+    padding:26px;
+
+}
+
+
+/*==================================================
+                ICON
+==================================================*/
+
+.tsProjectIcon{
+
+    width:62px;
+
+    height:62px;
+
+    border-radius:18px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:28px;
+
+    color:#fff;
+
+    background:
+
+    linear-gradient(180deg,
+
+    #ff9736,
+
+    #ff5d00);
+
+    box-shadow:
+
+    0 12px 30px rgba(255,122,0,.35);
+
+}
+
+
+/*==================================================
+                TITLE
+==================================================*/
+
+.tsProjectName{
+
+    color:#fff;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    margin-bottom:2px;
+
+}
+
+
+.tsProjectCategory{
+
+    color:#ff8a00;
+
+    font-size:17px;
+
+    font-weight:600;
+
+}
+
+
+/*==================================================
+                DESCRIPTION
+==================================================*/
+
+.tsProjectDescription{
+
+    margin-top:24px;
+
+    color:#b9c3d4;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+
+/*==================================================
+                TAGS
+==================================================*/
+
+.tsProjectTags{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:10px;
+
+    margin-top:24px;
+
+}
+
+
+.tsProjectTags span{
+
+    background:#111927;
+
+    color:#e9edf6;
+
+    padding:8px 16px;
+
+    border-radius:50px;
+
+    font-size:13px;
+
+    border:1px solid rgba(255,255,255,.06);
+
+    transition:.3s;
+
+}
+
+
+.tsProjectTags span:hover{
+
+    transform:translateY(-3px);
+
+    background:#1b2434;
+
+}
+
+
+/*==================================================
+                BUTTONS
+==================================================*/
+
+.tsLiveBtn{
+
+    height:54px;
+
+    border-radius:14px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-weight:600;
+
+    border:1px solid rgba(255,255,255,.12);
+
+    transition:.35s;
+
+}
+
+
+.tsLiveBtn i{
+
+    margin-right:10px;
+
+}
+
+
+.tsLiveBtn:hover{
+
+    background:#151d2b;
+
+    color:#fff;
+
+}
+
+
+.tsDetailsBtn{
+
+    height:54px;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    border-radius:14px;
+
+    text-decoration:none;
+
+    color:#fff;
+
+    font-weight:700;
+
+    background:
+
+    linear-gradient(90deg,#ff8d1d,#ff6200);
+
+    transition:.35s;
+
+}
+
+
+.tsDetailsBtn i{
+
+    margin-left:10px;
+
+}
+
+
+.tsDetailsBtn:hover{
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+    box-shadow:
+
+    0 12px 30px rgba(255,115,0,.35);
+
+}
+
+
+/*==================================================
+                ORANGE THEME
+==================================================*/
+
+.tsOrangeCard .tsProjectIcon{
+
+    background:
+
+    linear-gradient(180deg,#ff9833,#ff5d00);
+
+}
+
+
+.tsOrangeCard .tsProjectCategory{
+
+    color:#ff8a00;
+
+}
+
+
+.tsOrangeCard .tsDetailsBtn{
+
+    background:
+
+    linear-gradient(90deg,#ff9733,#ff6200);
+
+}
+</style>
+
+<body>
+    <section class="tsProjectsSection py-5">
+
+        <div class="container">
+
+            <div class="row justify-content-center">
+
+                <div class="col-lg-10 text-center">
+
+                    <span class="tsProjectMiniTitle">
+                        OUR WORK
+                    </span>
+
+                    <h2 class="tsProjectMainTitle">
+                        Our <span>Projects</span>
+                    </h2>
+
+                    <p class="tsProjectText">
+                        We build modern websites with premium UI, responsive layouts and high performance.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="row g-4 mt-2">
+
+                <!-- CARD START -->
+
+                <div class="col-xl-4 col-lg-6">
+
+                    <div class="tsProjectCard tsOrangeCard">
+
+                        <div class="tsProjectImageBox">
+
+                            <img src="https://picsum.photos/900/600" class="img-fluid" alt="">
+
+                        </div>
+
+                        <div class="tsProjectContent">
+
+                            <div class="d-flex align-items-start">
+
+                                <div class="tsProjectIcon">
+
+                                    <i class="bi bi-bag"></i>
+
+                                </div>
+
+                                <div class="flex-grow-1 ms-3">
+
+                                    <h3 class="tsProjectName">
+
+                                        Laat Saheb
+
+                                    </h3>
+
+                                    <div class="tsProjectCategory">
+
+                                        E-Commerce Website
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                            <p class="tsProjectDescription">
+
+                                Premium ecommerce platform with luxury interface,
+                                responsive design and smooth shopping experience.
+
+                            </p>
+
+
+                            <div class="tsProjectTags">
+
+                                <span>HTML</span>
+
+                                <span>CSS</span>
+
+                                <span>Bootstrap</span>
+
+                                <span>JavaScript</span>
+
+                                <span>Django</span>
+
+                            </div>
+
+
+                            <div class="row mt-4">
+
+                                <div class="col-6">
+
+                                    <a href="#" class="tsLiveBtn">
+
+                                        <i class="bi bi-box-arrow-up-right"></i>
+
+                                        Live Preview
+
+                                    </a>
+
+                                </div>
+
+                                <div class="col-6">
+
+                                    <a href="#" class="tsDetailsBtn">
+
+                                        View Details
+
+                                        <i class="bi bi-arrow-right"></i>
+
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- CARD END -->
+
+
+            </div>
+
+        </div>
+
+    </section>
+</body>
+
+</html>

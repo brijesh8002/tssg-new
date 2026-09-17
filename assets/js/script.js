@@ -88,10 +88,7 @@ function initEyesFollow() {
       const eyeX = rect.left + rect.width / 2;
       const eyeY = rect.top + rect.height / 2;
 
-      const angle = Math.atan2(
-        e.clientY - eyeY,
-        e.clientX - eyeX
-      );
+      const angle = Math.atan2(e.clientY - eyeY, e.clientX - eyeX);
 
       const moveX = Math.cos(angle) * 3;
       const moveY = Math.sin(angle) * 3;
@@ -255,7 +252,7 @@ function initPremiumCursor() {
   });
 
   const items = document.querySelectorAll(
-    "h1,h2,h3,h4,h5,h6,p,a,button,span,.tour-card"
+    "h1,h2,h3,h4,h5,h6,p,a,button,span,.tour-card",
   );
 
   items.forEach((item) => {
@@ -284,13 +281,11 @@ function initPremiumCursor() {
   });
 
   window.addEventListener("mousedown", () => {
-    cursor.style.transform =
-      "translate(-50%, -50%) scale(.75)";
+    cursor.style.transform = "translate(-50%, -50%) scale(.75)";
   });
 
   window.addEventListener("mouseup", () => {
-    cursor.style.transform =
-      "translate(-50%, -50%) scale(1)";
+    cursor.style.transform = "translate(-50%, -50%) scale(1)";
   });
 }
 
@@ -305,37 +300,27 @@ document.addEventListener("DOMContentLoaded", () => {
   initPremiumCursor();
 });
 
-
-
-
 // // Testing purpose
 
-// if(window.innerWidth < 992){
 
-// document.querySelectorAll('.dropdown-menu .col-lg-3').forEach(function(col){
+document.addEventListener("DOMContentLoaded", function () {
+  const skillBtns = document.querySelectorAll(".tssg-skill-btn");
 
-//     const title = col.querySelector('.dropdown-header');
+  skillBtns.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      skillBtns.forEach((item) => {
+        item.classList.remove("active");
+      });
 
-//     if(title){
+      document.querySelectorAll(".tssg-skills-grid").forEach((grid) => {
+        grid.classList.remove("active");
+      });
 
-//         title.addEventListener('click',function(){
+      this.classList.add("active");
 
-//             document.querySelectorAll(
-//                 '.dropdown-menu .col-lg-3'
-//             ).forEach(function(other){
+      const target = this.getAttribute("data-target");
 
-//                 if(other !== col){
-//                     other.classList.remove('mobile-open');
-//                 }
-
-//             });
-
-//             col.classList.toggle('mobile-open');
-
-//         });
-
-//     }
-
-// });
-
-// }
+      document.getElementById(target).classList.add("active");
+    });
+  });
+});
