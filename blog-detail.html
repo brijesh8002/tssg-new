@@ -9,10 +9,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
+
+  <link rel="stylesheet" href="assets/css/style.css">
+  <!-- Blog detail page styles (this must load AFTER style.css) -->
+  <link rel="stylesheet" href="assets/css/blog-detail.css">
   <style>
-    /* ============================================================
-       ROOT TOKENS
-    ============================================================ */
+    /* ROOT TOKENS */
     :root {
       --main-color:      #48B0A8;
       --primary-color:   #58239F;
@@ -36,1342 +38,190 @@
       font-family: var(--font-body);
       background: var(--bg-dark);
       color: var(--secondary-color);
-      overflow-x: hidden;
     }
     h1,h2,h3,h4,h5 { font-family: var(--font-display); }
     a { text-decoration: none; color: inherit; }
-
-    /* ============================================================
-       READING PROGRESS BAR
-    ============================================================ */
-    .reading-progress {
-      position: fixed;
-      top: 0; left: 0;
-      height: 3px;
-      width: 0%;
-      background: linear-gradient(90deg, var(--main-color), var(--primary-color), #b07ef5);
-      z-index: 9999;
-      transition: width 0.1s linear;
-    }
-
-    /* ============================================================
-       POST HERO
-    ============================================================ */
-    .post-hero {
-      position: relative;
-      padding: 72px 0 0;
-      background: var(--bg-dark);
-      overflow: hidden;
-    }
-    .post-hero::before {
-      content: '';
-      position: absolute;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(88,35,159,0.22) 0%, transparent 65%);
-      top: -250px; left: -180px;
-      pointer-events: none;
-    }
-    .post-hero::after {
-      content: '';
-      position: absolute;
-      width: 500px; height: 500px;
-      background: radial-gradient(circle, rgba(72,176,168,0.15) 0%, transparent 65%);
-      top: 50px; right: -150px;
-      pointer-events: none;
-    }
-
-    /* Breadcrumb */
-    .post-breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 32px;
-      position: relative;
-      z-index: 2;
-    }
-    .post-breadcrumb a {
-      color: rgba(255,255,255,0.6);
-      transition: color var(--transition);
-    }
-    .post-breadcrumb a:hover { color: var(--main-color); }
-    .post-breadcrumb .bc-sep {
-      color: var(--text-muted);
-      font-size: 0.7rem;
-    }
-
-    /* Hero text block */
-    .post-hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 860px;
-    }
-    .post-category-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 5px 14px;
-      border-radius: var(--radius-pill);
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      backdrop-filter: blur(10px);
-      margin-bottom: 20px;
-    }
-    .pill-ai { background: rgba(100,220,160,0.15); color: #5ddb9e; border: 1px solid rgba(100,220,160,0.4); }
-
-    .post-hero-title {
-      font-size: clamp(2rem, 5vw, 3.4rem);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      color: var(--secondary-color);
-      margin-bottom: 20px;
-    }
-    .post-hero-excerpt {
-      font-size: 1.05rem;
-      color: var(--text-muted);
-      line-height: 1.72;
-      max-width: 700px;
-      margin-bottom: 32px;
-    }
-
-    /* Author + meta row */
-    .post-hero-meta {
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
-      margin-bottom: 0;
-    }
-    .post-author-block {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .author-avatar-lg {
-      width: 48px; height: 48px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--main-color), var(--primary-color));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.9rem;
-      font-weight: 800;
-      color: #fff;
-      flex-shrink: 0;
-      border: 2px solid rgba(72,176,168,0.3);
-    }
-    .author-details {}
-    .author-name-lg {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--secondary-color);
-    }
-    .author-role {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-    }
-    .post-meta-divider {
-      width: 1px; height: 32px;
-      background: var(--border-subtle);
-    }
-    .meta-stat {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-    }
-    .meta-stat i { color: var(--main-color); font-size: 0.82rem; }
-    .meta-stat strong { color: rgba(255,255,255,0.7); font-weight: 600; }
-
-    /* Hero visual */
-    .post-hero-visual {
-      position: relative;
-      margin-top: 48px;
-      border-radius: 20px 20px 0 0;
-      overflow: hidden;
-      height: 460px;
-    }
-    .hero-visual-inner {
-      width: 100%; height: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(160deg, #080a1e 0%, #0d1a2e 40%, #0a0818 100%);
-      position: relative;
-    }
-    .hv-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(72,176,168,0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(72,176,168,0.05) 1px, transparent 1px);
-      background-size: 48px 48px;
-    }
-    .hv-glow-left {
-      position: absolute;
-      width: 400px; height: 400px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(88,35,159,0.45) 0%, transparent 70%);
-      left: -80px; top: -80px;
-    }
-    .hv-glow-right {
-      position: absolute;
-      width: 360px; height: 360px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(72,176,168,0.3) 0%, transparent 70%);
-      right: -60px; bottom: -80px;
-    }
-    .hv-content {
-      position: relative; z-index: 2;
-      text-align: center;
-    }
-    .hv-icon-cluster {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 20px;
-      margin-bottom: 28px;
-    }
-    .hv-icon {
-      width: 64px; height: 64px;
-      border-radius: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.6rem;
-    }
-    .hv-icon.main {
-      width: 88px; height: 88px;
-      border-radius: 24px;
-      font-size: 2.4rem;
-      border: 2px solid rgba(72,176,168,0.35);
-      background: rgba(72,176,168,0.1);
-      color: var(--main-color);
-    }
-    .hv-icon.side {
-      background: rgba(88,35,159,0.2);
-      border: 1px solid rgba(88,35,159,0.4);
-      color: #b07ef5;
-    }
-    .hv-headline {
-      font-family: var(--font-display);
-      font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-      font-weight: 700;
-      color: rgba(255,255,255,0.88);
-    }
-    .hv-subline {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-top: 8px;
-    }
-    /* floating badges on hero visual */
-    .hv-badge-float {
-      position: absolute;
-      padding: 8px 16px;
-      border-radius: 12px;
-      background: rgba(11,11,26,0.85);
-      backdrop-filter: blur(12px);
-      border: 1px solid var(--border-subtle);
-      font-size: 0.76rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.8);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      z-index: 5;
-    }
-    .hv-badge-float i { color: var(--main-color); }
-    .hv-badge-float.top-left  { top: 28px; left: 28px; }
-    .hv-badge-float.top-right { top: 28px; right: 28px; }
-    .hv-badge-float.bot-left  { bottom: 28px; left: 28px; }
-    .hv-badge-float.bot-right { bottom: 28px; right: 28px; }
-
-    /* ============================================================
-       STICKY SHARE BAR (floating left)
-    ============================================================ */
-    .sticky-share {
-      position: fixed;
-      left: 28px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 10px;
-      z-index: 100;
-    }
-    .share-label {
-      font-size: 0.65rem;
-      font-weight: 700;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      writing-mode: vertical-rl;
-      text-orientation: mixed;
-      transform: rotate(180deg);
-    }
-    .share-line { width: 1px; height: 32px; background: var(--border-subtle); }
-    .share-btn {
-      width: 38px; height: 38px;
-      border-radius: 50%;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-    .share-btn:hover {
-      background: var(--main-color);
-      border-color: var(--main-color);
-      color: #fff;
-      transform: scale(1.1);
-    }
-    .share-btn.liked { background: rgba(240,80,100,0.2); border-color: #f05064; color: #f05064; }
-
-    /* ============================================================
-       ARTICLE BODY + SIDEBAR LAYOUT
-    ============================================================ */
-    .article-layout {
-      padding: 64px 0 80px;
-    }
-    .article-layout-inner {
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 48px;
-      align-items: start;
-    }
-
-    /* ── Article Content ──────────────────────────────────── */
-    .article-content {}
-
-    /* TOC */
-    .article-toc {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border-subtle);
-      border-left: 3px solid var(--main-color);
-      border-radius: 0 12px 12px 0;
-      padding: 20px 24px;
-      margin-bottom: 44px;
-    }
-    .toc-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--main-color);
-      margin-bottom: 14px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .toc-list {
-      list-style: none;
-      padding: 0; margin: 0;
-      counter-reset: toc;
-    }
-    .toc-list li {
-      counter-increment: toc;
-      margin-bottom: 8px;
-    }
-    .toc-list li a {
-      font-size: 0.83rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: color var(--transition);
-    }
-    .toc-list li a::before {
-      content: counter(toc, decimal-leading-zero);
-      font-size: 0.7rem;
-      font-weight: 700;
-      color: var(--main-color);
-      opacity: 0.7;
-      min-width: 22px;
-    }
-    .toc-list li a:hover { color: var(--main-color); }
-    .toc-list li.toc-sub a { padding-left: 32px; font-size: 0.79rem; }
-    .toc-list li.toc-sub a::before { opacity: 0; }
-
-    /* Article typography */
-    .article-body {
-      font-family: var(--font-article);
-    }
-    .article-body h2 {
-      font-family: var(--font-display);
-      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
-      font-weight: 700;
-      color: var(--secondary-color);
-      margin: 48px 0 18px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-    .article-body h2 .h-accent {
-      width: 4px; height: 28px;
-      border-radius: 2px;
-      background: linear-gradient(180deg, var(--main-color), var(--primary-color));
-      flex-shrink: 0;
-    }
-    .article-body h3 {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--secondary-color);
-      margin: 32px 0 14px;
-    }
-    .article-body p {
-      font-size: 1rem;
-      line-height: 1.85;
-      color: rgba(255,255,255,0.75);
-      margin-bottom: 22px;
-    }
-    .article-body strong { color: rgba(255,255,255,0.9); font-weight: 600; }
-    .article-body em { color: var(--main-color); font-style: italic; }
-    .article-body a { color: var(--main-color); border-bottom: 1px solid rgba(72,176,168,0.3); transition: border-color var(--transition); }
-    .article-body a:hover { border-color: var(--main-color); }
-
-    /* Pull quote */
-    .pull-quote {
-      margin: 36px 0;
-      padding: 28px 32px;
-      background: linear-gradient(135deg, rgba(88,35,159,0.18), rgba(72,176,168,0.1));
-      border-left: 4px solid var(--main-color);
-      border-radius: 0 16px 16px 0;
-      position: relative;
-    }
-    .pull-quote::before {
-      content: '"';
-      font-family: Georgia, serif;
-      font-size: 5rem;
-      line-height: 1;
-      color: var(--main-color);
-      opacity: 0.25;
-      position: absolute;
-      top: 10px; left: 16px;
-    }
-    .pull-quote-text {
-      font-family: var(--font-display);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--secondary-color);
-      line-height: 1.55;
-      position: relative;
-      z-index: 1;
-    }
-    .pull-quote-source {
-      margin-top: 10px;
-      font-size: 0.78rem;
-      color: var(--text-muted);
-    }
-
-    /* Info box */
-    .info-box {
-      margin: 28px 0;
-      padding: 20px 24px;
-      border-radius: 14px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .info-box.info-note {
-      background: rgba(72,176,168,0.08);
-      border: 1px solid rgba(72,176,168,0.25);
-    }
-    .info-box.info-warn {
-      background: rgba(255,160,80,0.08);
-      border: 1px solid rgba(255,160,80,0.25);
-    }
-    .info-box.info-tip {
-      background: rgba(88,35,159,0.12);
-      border: 1px solid rgba(88,35,159,0.3);
-    }
-    .info-box-icon {
-      font-size: 1.3rem;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-    .info-note .info-box-icon  { color: var(--main-color); }
-    .info-warn .info-box-icon  { color: #f9a654; }
-    .info-tip  .info-box-icon  { color: #b07ef5; }
-    .info-box-text {
-      font-size: 0.87rem;
-      line-height: 1.65;
-      color: rgba(255,255,255,0.7);
-    }
-    .info-box-text strong {
-      display: block;
-      margin-bottom: 4px;
-      font-size: 0.82rem;
-      font-family: var(--font-display);
-    }
-    .info-note .info-box-text strong { color: var(--main-color); }
-    .info-warn .info-box-text strong { color: #f9a654; }
-    .info-tip  .info-box-text strong { color: #b07ef5; }
-
-    /* Code block */
-    .code-block {
-      margin: 28px 0;
-      border-radius: 14px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-    .code-header {
-      background: rgba(255,255,255,0.05);
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-    }
-    .code-lang {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--main-color);
-      font-family: var(--font-body);
-    }
-    .code-dots { display: flex; gap: 5px; }
-    .code-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .code-copy {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      font-family: var(--font-body);
-      border: none;
-      background: none;
-      transition: color var(--transition);
-      padding: 2px 8px;
-      border-radius: 6px;
-    }
-    .code-copy:hover { color: var(--main-color); background: rgba(72,176,168,0.08); }
-    .code-body {
-      background: #080d14;
-      padding: 20px 22px;
-      overflow-x: auto;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.83rem;
-      line-height: 1.7;
-      color: #c8d8f0;
-    }
-    .code-body .kw  { color: #b07ef5; }
-    .code-body .fn  { color: var(--main-color); }
-    .code-body .str { color: #5ddb9e; }
-    .code-body .cm  { color: #6080a0; }
-    .code-body .num { color: #f9a654; }
-
-    /* Stats/Numbers inline */
-    .article-stat-row {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 32px 0;
-    }
-    .article-stat-item {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 14px;
-      padding: 20px 16px;
-      text-align: center;
-    }
-    .article-stat-num {
-      font-family: var(--font-display);
-      font-size: 1.9rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--main-color), #b07ef5);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .article-stat-lbl {
-      font-size: 0.76rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      font-family: var(--font-body);
-    }
-
-    /* List styles inside article */
-    .article-list {
-      list-style: none;
-      padding: 0; margin: 0 0 22px;
-    }
-    .article-list li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.96rem;
-      line-height: 1.75;
-      color: rgba(255,255,255,0.72);
-      margin-bottom: 10px;
-    }
-    .article-list li::before {
-      content: '';
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--main-color);
-      flex-shrink: 0;
-      margin-top: 9px;
-    }
-    .article-list.numbered { counter-reset: alist; }
-    .article-list.numbered li { counter-increment: alist; }
-    .article-list.numbered li::before {
-      content: counter(alist);
-      width: 24px; height: 24px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--main-color), var(--primary-color));
-      color: #fff;
-      font-size: 0.68rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 0;
-      font-family: var(--font-body);
-    }
-
-    /* Image placeholder in article */
-    .article-img {
-      margin: 32px 0;
-      border-radius: 16px;
-      overflow: hidden;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-    .article-img-inner {
-      height: 300px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #0f1424, #0a0a1e);
-      position: relative;
-    }
-    .article-img-inner .img-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(72,176,168,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(72,176,168,0.04) 1px, transparent 1px);
-      background-size: 36px 36px;
-    }
-    .article-img-caption {
-      padding: 12px 18px;
-      background: rgba(255,255,255,0.02);
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .article-img-caption i { color: var(--main-color); }
-
-    /* ── Post Footer: Tags + Share ──────────────────────────── */
-    .post-footer-bar {
-      margin-top: 56px;
-      padding-top: 28px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-    .post-tags { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-    .post-tags-label { font-size: 0.78rem; color: var(--text-muted); font-weight: 600; }
-    .post-tag {
-      padding: 5px 13px;
-      border-radius: var(--radius-pill);
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 0.74rem;
-      font-weight: 500;
-      color: var(--text-muted);
-      transition: all var(--transition);
-      cursor: pointer;
-    }
-    .post-tag:hover { background: rgba(72,176,168,0.12); border-color: rgba(72,176,168,0.35); color: var(--main-color); }
-
-    .post-share-row { display: flex; align-items: center; gap: 10px; }
-    .share-row-label { font-size: 0.78rem; color: var(--text-muted); }
-    .share-icon-btn {
-      width: 36px; height: 36px;
-      border-radius: 10px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-    .share-icon-btn:hover { background: var(--main-color); border-color: var(--main-color); color: #fff; }
-
-    /* ── Author Card ─────────────────────────────────────────── */
-    .author-card {
-      margin-top: 44px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 32px;
-      display: flex;
-      gap: 24px;
-      align-items: flex-start;
-    }
-    .author-card-avatar {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--main-color), var(--primary-color));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #fff;
-      flex-shrink: 0;
-      border: 3px solid rgba(72,176,168,0.3);
-    }
-    .author-card-info { flex: 1; }
-    .author-card-label {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--main-color);
-      margin-bottom: 6px;
-    }
-    .author-card-name {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-    .author-card-role {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-    .author-card-bio {
-      font-size: 0.85rem;
-      color: rgba(255,255,255,0.6);
-      line-height: 1.65;
-      margin-bottom: 16px;
-    }
-    .author-socials { display: flex; gap: 8px; }
-    .author-social-btn {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
-      transition: all var(--transition);
-      cursor: pointer;
-    }
-    .author-social-btn:hover { background: var(--main-color); border-color: var(--main-color); color: #fff; }
-
-    /* ── Comments Section ────────────────────────────────────── */
-    .comments-section {
-      margin-top: 52px;
-    }
-    .comments-header {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .comments-header h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin: 0;
-    }
-    .comments-count {
-      padding: 3px 10px;
-      background: rgba(72,176,168,0.15);
-      border-radius: var(--radius-pill);
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--main-color);
-    }
-    .comment-item {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 28px;
-    }
-    .comment-avatar {
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--primary-color), var(--main-color));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: #fff;
-      flex-shrink: 0;
-    }
-    .comment-body-wrap {
-      flex: 1;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.06);
-      border-radius: 14px;
-      padding: 16px 18px;
-    }
-    .comment-meta-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-    .comment-author-name {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--secondary-color);
-    }
-    .comment-date {
-      font-size: 0.72rem;
-      color: var(--text-muted);
-    }
-    .comment-text {
-      font-size: 0.86rem;
-      color: rgba(255,255,255,0.65);
-      line-height: 1.65;
-      margin-bottom: 10px;
-    }
-    .comment-reply-btn {
-      font-size: 0.74rem;
-      font-weight: 600;
-      color: var(--main-color);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      transition: opacity var(--transition);
-    }
-    .comment-reply-btn:hover { opacity: 0.75; }
-    .comment-item.reply { margin-left: 52px; }
-
-    /* Comment form */
-    .comment-form-section {
-      margin-top: 40px;
-    }
-    .comment-form-title {
-      font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .comment-form-title i { color: var(--main-color); }
-    .cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
-    .cform-group { display: flex; flex-direction: column; gap: 6px; }
-    .cform-group label { font-size: 0.78rem; font-weight: 600; color: rgba(255,255,255,0.6); }
-    .cform-group input,
-    .cform-group textarea {
-      background: rgba(255,255,255,0.04);
-      border: 1.5px solid var(--border-subtle);
-      border-radius: 10px;
-      color: var(--secondary-color);
-      padding: 11px 16px;
-      font-size: 0.85rem;
-      font-family: var(--font-body);
-      transition: border-color var(--transition);
-    }
-    .cform-group input::placeholder,
-    .cform-group textarea::placeholder { color: var(--text-muted); }
-    .cform-group input:focus,
-    .cform-group textarea:focus { outline: none; border-color: var(--main-color); }
-    .cform-group textarea { resize: vertical; min-height: 120px; }
-    .btn-submit-comment {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 12px 28px;
-      background: linear-gradient(135deg, var(--main-color), var(--primary-color));
-      border: none;
-      border-radius: var(--radius-pill);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.88rem;
-      cursor: pointer;
-      transition: opacity var(--transition), transform var(--transition);
-      font-family: var(--font-body);
-    }
-    .btn-submit-comment:hover { opacity: 0.85; transform: translateY(-2px); }
-
-    /* ── Related Posts ────────────────────────────────────────── */
-    .related-section {
-      padding: 0 0 80px;
-    }
-    .detail-section-label {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 32px;
-    }
-    .detail-section-label .lbl-line {
-      width: 32px; height: 2px;
-      background: var(--main-color);
-      border-radius: 2px;
-    }
-    .detail-section-label h4 {
-      font-size: 0.76rem;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--main-color);
-      margin: 0;
-    }
-    .related-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-    .related-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-      cursor: pointer;
-      transition: transform var(--transition), border-color var(--transition), box-shadow var(--transition);
-    }
-    .related-card:hover {
-      transform: translateY(-5px);
-      border-color: var(--main-color);
-      box-shadow: 0 14px 40px rgba(72,176,168,0.12);
-    }
-    .related-visual {
-      aspect-ratio: 16/9;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-    }
-    .related-visual .rv-grid {
-      position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 20px 20px;
-    }
-    .related-visual .rv-icon {
-      position: relative; z-index: 2;
-      width: 48px; height: 48px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.4rem;
-    }
-    .rv1 { background: linear-gradient(135deg, #141020, #0a0814); }
-    .rv2 { background: linear-gradient(135deg, #101820, #080e14); }
-    .rv3 { background: linear-gradient(135deg, #0a1410, #060e08); }
-    .related-body { padding: 18px 18px 16px; }
-    .related-cat {
-      font-size: 0.7rem;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      margin-bottom: 8px;
-    }
-    .related-title {
-      font-size: 0.92rem;
-      font-weight: 700;
-      color: var(--secondary-color);
-      line-height: 1.38;
-      margin-bottom: 12px;
-      transition: color var(--transition);
-    }
-    .related-card:hover .related-title { color: var(--main-color); }
-    .related-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: 0.74rem;
-      color: var(--text-muted);
-    }
-
-    /* ============================================================
-       SIDEBAR (detail page)
-    ============================================================ */
-    .detail-sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      position: sticky;
-      top: 90px;
-    }
-    .ds-widget {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-card);
-      overflow: hidden;
-    }
-    .ds-widget-header {
-      padding: 18px 20px 14px;
-      border-bottom: 1px solid rgba(255,255,255,0.06);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .ds-widget-header .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--main-color); }
-    .ds-widget-header h5 { font-size: 0.88rem; font-weight: 700; margin: 0; }
-    .ds-widget-body { padding: 16px 20px; }
-
-    /* TOC in sidebar */
-    .sidebar-toc-list {
-      list-style: none;
-      padding: 0; margin: 0;
-    }
-    .sidebar-toc-list li {
-      margin-bottom: 6px;
-    }
-    .sidebar-toc-list li a {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      padding: 5px 8px;
-      border-radius: 8px;
-      transition: all var(--transition);
-    }
-    .sidebar-toc-list li a:hover { background: rgba(72,176,168,0.08); color: var(--main-color); }
-    .sidebar-toc-list li a.active-toc { background: rgba(72,176,168,0.1); color: var(--main-color); }
-    .sidebar-toc-list li a i { color: var(--main-color); font-size: 0.7rem; flex-shrink: 0; margin-top: 3px; }
-
-    /* Share box sidebar */
-    .ds-share-list { display: flex; flex-direction: column; gap: 8px; }
-    .ds-share-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 12px;
-      border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.06);
-      background: rgba(255,255,255,0.02);
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: rgba(255,255,255,0.65);
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-    .ds-share-item:hover { border-color: var(--main-color); color: var(--secondary-color); background: rgba(72,176,168,0.07); }
-    .ds-share-item i { font-size: 1rem; }
-    .ds-share-item.twitter i { color: #1da1f2; }
-    .ds-share-item.linkedin i { color: #0a66c2; }
-    .ds-share-item.copy i    { color: var(--main-color); }
-    .ds-share-item.whatsapp i { color: #25d366; }
-
-    /* Newsletter mini */
-    .ds-newsletter {
-      background: linear-gradient(135deg, rgba(88,35,159,0.22), rgba(72,176,168,0.12));
-      border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-card);
-      padding: 22px 20px;
-    }
-    .ds-nl-icon { font-size: 1.8rem; color: var(--main-color); margin-bottom: 10px; }
-    .ds-nl-title { font-size: 0.92rem; font-weight: 700; margin-bottom: 6px; }
-    .ds-nl-text { font-size: 0.78rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
-    .ds-nl-input {
-      width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1.5px solid var(--border-subtle);
-      border-radius: var(--radius-pill);
-      color: var(--secondary-color);
-      padding: 9px 14px;
-      font-size: 0.8rem;
-      font-family: var(--font-body);
-      margin-bottom: 8px;
-    }
-    .ds-nl-input::placeholder { color: var(--text-muted); }
-    .ds-nl-input:focus { outline: none; border-color: var(--main-color); }
-    .ds-nl-btn {
-      width: 100%;
-      padding: 10px;
-      background: linear-gradient(135deg, var(--main-color), var(--primary-color));
-      border: none;
-      border-radius: var(--radius-pill);
-      color: #fff;
-      font-weight: 700;
-      font-size: 0.82rem;
-      cursor: pointer;
-      font-family: var(--font-body);
-    }
-
-    /* ── Prev/Next Post Navigation ──────────────────────────── */
-    .post-navigation {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 48px;
-    }
-    .post-nav-item {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      padding: 20px;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-    .post-nav-item:hover { border-color: var(--main-color); transform: translateY(-3px); }
-    .post-nav-item.next { text-align: right; }
-    .post-nav-dir {
-      font-size: 0.72rem;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--main-color);
-      margin-bottom: 8px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .post-nav-item.next .post-nav-dir { justify-content: flex-end; }
-    .post-nav-title {
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--secondary-color);
-      line-height: 1.4;
-      transition: color var(--transition);
-    }
-    .post-nav-item:hover .post-nav-title { color: var(--main-color); }
-
-    /* ============================================================
-       SCROLL TOP
-    ============================================================ */
-    .tssg-scroll-top {
-      position: fixed;
-      bottom: 28px; right: 28px;
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--main-color), var(--primary-color));
-      color: #fff;
-      font-size: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      opacity: 0; pointer-events: none;
-      transition: opacity var(--transition), transform var(--transition);
-      z-index: 999;
-      border: none;
-    }
-    .tssg-scroll-top.visible { opacity: 1; pointer-events: auto; }
-    .tssg-scroll-top:hover { transform: translateY(-3px); }
-
-    /* ============================================================
-       RESPONSIVE
-    ============================================================ */
-    @media (max-width: 1199px) {
-      .article-layout-inner { grid-template-columns: 1fr 280px; gap: 32px; }
-      .sticky-share { display: none; }
-    }
-    @media (max-width: 991px) {
-      .article-layout-inner { grid-template-columns: 1fr; }
-      .detail-sidebar { position: static; }
-      .related-grid { grid-template-columns: 1fr 1fr; }
-      .sticky-share { display: none; }
-      .post-hero-visual { height: 320px; }
-      .hv-badge-float.bot-left,
-      .hv-badge-float.top-right { display: none; }
-    }
-    @media (max-width: 767px) {
-      .article-stat-row { grid-template-columns: 1fr 1fr; }
-      .cform-row { grid-template-columns: 1fr; }
-      .related-grid { grid-template-columns: 1fr; }
-      .post-navigation { grid-template-columns: 1fr; }
-      .post-hero-visual { height: 240px; }
-      .hv-badge-float { display: none; }
-      .hv-icon-cluster { gap: 12px; }
-      .hv-icon.side { width: 48px; height: 48px; font-size: 1.2rem; }
-    }
-    @media (max-width: 575px) {
-      .post-hero-meta { gap: 14px; }
-      .post-meta-divider { display: none; }
-      .post-footer-bar { flex-direction: column; align-items: flex-start; }
-      .author-card { flex-direction: column; }
-      .comment-item.reply { margin-left: 24px; }
-    }
+    @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
   </style>
 </head>
 <body>
+  <!-- PREMIUM ANIMATED CURSOR -->
+  <div class="vx12-cursor"></div>
 
-  <!-- Reading Progress -->
-  <div class="reading-progress" id="readingProgress"></div>
+  <!-- DOTS -->
+  <div class="vx12-dot"></div>
+  <div class="vx12-dot"></div>
+  <div class="vx12-dot"></div>
+  <div class="vx12-dot"></div>
+  <div class="vx12-dot"></div>
+  <div class="vx12-dot"></div>
+  <div class="vx12-dot"></div>
+  <div class="vx12-dot"></div>
 
-  <!-- Sticky Share (desktop) -->
-  <div class="sticky-share" id="stickyShare">
-    <div class="share-line"></div>
-    <div class="share-label">Share</div>
-    <button class="share-btn" title="Like" id="likeBtn"><i class="bi bi-heart"></i></button>
-    <button class="share-btn" title="Twitter/X"><i class="bi bi-twitter-x"></i></button>
-    <button class="share-btn" title="LinkedIn"><i class="bi bi-linkedin"></i></button>
-    <button class="share-btn" title="WhatsApp"><i class="bi bi-whatsapp"></i></button>
-    <button class="share-btn" title="Copy Link"><i class="bi bi-link-45deg"></i></button>
-    <div class="share-line"></div>
-  </div>
+  <main>
+    <!-- HEADER (unchanged) -->
+    <header id="header"></header>
 
-  <!-- ============================================================
-       POST HERO
-  ============================================================ -->
-  <section class="post-hero">
-    <div class="container">
-      <!-- Breadcrumb -->
-      <div class="post-breadcrumb">
-        <a href="#">Home</a>
-        <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
-        <a href="blog.html">Blog</a>
-        <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
-        <span>AI & Machine Learning</span>
-      </div>
+    <!-- Reading Progress -->
+    <div class="reading-progress" id="readingProgress"></div>
 
-      <!-- Title & Meta -->
-      <div class="post-hero-content">
-        <span class="post-category-pill pill-ai"><i class="bi bi-stars"></i> AI & ML</span>
-        <h1 class="post-hero-title">How AI Is Completely Reshaping the Future of Web Design in 2026</h1>
-        <p class="post-hero-excerpt">Artificial intelligence is no longer a buzzword — it's rewriting the rules of design, development, and digital experiences. We break down the biggest shifts happening right now, from generative UI to predictive UX patterns.</p>
-        <div class="post-hero-meta">
-          <div class="post-author-block">
-            <div class="author-avatar-lg">RS</div>
-            <div class="author-details">
-              <div class="author-name-lg">Rahul Sharma</div>
-              <div class="author-role">Lead Developer & Technical Writer</div>
-            </div>
-          </div>
-          <div class="post-meta-divider"></div>
-          <div class="meta-stat"><i class="bi bi-calendar3"></i><strong>June 10, 2026</strong></div>
-          <div class="post-meta-divider"></div>
-          <div class="meta-stat"><i class="bi bi-clock"></i><strong>9 min read</strong></div>
-          <div class="post-meta-divider"></div>
-          <div class="meta-stat"><i class="bi bi-eye"></i><strong>4,820 views</strong></div>
-          <div class="meta-stat"><i class="bi bi-heart"></i><strong>312 likes</strong></div>
-        </div>
-      </div>
-
-      <!-- Hero Visual -->
-      <div class="post-hero-visual">
-        <div class="hero-visual-inner">
-          <div class="hv-grid"></div>
-          <div class="hv-glow-left"></div>
-          <div class="hv-glow-right"></div>
-          <div class="hv-content">
-            <div class="hv-icon-cluster">
-              <div class="hv-icon side"><i class="bi bi-palette2"></i></div>
-              <div class="hv-icon main"><i class="bi bi-cpu"></i></div>
-              <div class="hv-icon side"><i class="bi bi-code-slash"></i></div>
-            </div>
-            <div class="hv-headline">AI × Web Design</div>
-            <div class="hv-subline">The Complete 2026 Landscape</div>
-          </div>
-          <div class="hv-badge-float top-left"><i class="bi bi-stars"></i> Generative UI</div>
-          <div class="hv-badge-float top-right"><i class="bi bi-graph-up-arrow"></i> +340% Adoption</div>
-          <div class="hv-badge-float bot-left"><i class="bi bi-shield-check"></i> Verified Research</div>
-          <div class="hv-badge-float bot-right"><i class="bi bi-clock"></i> June 2026</div>
-        </div>
-      </div>
+    <!-- Sticky Share (large desktop only) -->
+    <div class="sticky-share" id="stickyShare">
+      <div class="share-line"></div>
+      <div class="share-label">Share</div>
+      <button class="share-btn" title="Like" id="likeBtn"><i class="bi bi-heart"></i></button>
+      <button class="share-btn" title="Twitter/X"><i class="bi bi-twitter-x"></i></button>
+      <button class="share-btn" title="LinkedIn"><i class="bi bi-linkedin"></i></button>
+      <button class="share-btn" title="WhatsApp"><i class="bi bi-whatsapp"></i></button>
+      <button class="share-btn" title="Copy Link"><i class="bi bi-link-45deg"></i></button>
+      <div class="share-line"></div>
     </div>
-  </section>
 
+    <!-- ============================================================
+         POST HERO
+    ============================================================ -->
+    <section class="post-hero xh-page-banner">
+      <div class="container">
+        <!-- Breadcrumb -->
+        <div class="post-breadcrumb">
+          <a href="#">Home</a>
+          <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+          <a href="blog.html">Blog</a>
+          <span class="bc-sep"><i class="bi bi-chevron-right"></i></span>
+          <span>AI &amp; Machine Learning</span>
+        </div>
 
-  <!-- ============================================================
-       ARTICLE BODY + SIDEBAR
-  ============================================================ -->
-  <section class="article-layout">
-    <div class="container">
-      <div class="article-layout-inner">
-
-        <!-- ── Main Article ──────────────────────────────────── -->
-        <main>
-
-          <!-- Table of Contents -->
-          <div class="article-toc">
-            <div class="toc-title"><i class="bi bi-list-ul"></i> Table of Contents</div>
-            <ol class="toc-list">
-              <li><a href="#s1">The State of AI in Web Design Today</a></li>
-              <li><a href="#s2">Generative UI: When the Interface Designs Itself</a></li>
-              <li class="toc-sub"><a href="#s2a">What Generative UI Actually Looks Like</a></li>
-              <li><a href="#s3">Predictive UX Patterns Powered by ML</a></li>
-              <li><a href="#s4">Key Statistics You Need to Know</a></li>
-              <li><a href="#s5">What This Means for Businesses & Developers</a></li>
-              <li><a href="#s6">How to Future-Proof Your Web Strategy</a></li>
-              <li><a href="#s7">Final Thoughts</a></li>
-            </ol>
+        <!-- Title & Meta -->
+        <div class="post-hero-content">
+          <span class="post-category-pill pill-ai"><i class="bi bi-stars"></i> AI &amp; ML</span>
+          <h1 class="post-hero-title">How AI Is Completely Reshaping the Future of Web Design in 2026</h1>
+          <p class="post-hero-excerpt">Artificial intelligence is no longer a buzzword — it's rewriting the rules of design, development, and digital experiences. We break down the biggest shifts happening right now, from generative UI to predictive UX patterns.</p>
+          <div class="post-hero-meta">
+            <div class="post-author-block">
+              <div class="author-avatar-lg">RS</div>
+              <div class="author-details">
+                <div class="author-name-lg">Rahul Sharma</div>
+                <div class="author-role">Lead Developer &amp; Technical Writer</div>
+              </div>
+            </div>
+            <div class="post-meta-divider"></div>
+            <div class="meta-stat"><i class="bi bi-calendar3"></i><strong>June 10, 2026</strong></div>
+            <div class="post-meta-divider"></div>
+            <div class="meta-stat"><i class="bi bi-clock"></i><strong>9 min read</strong></div>
+            <div class="post-meta-divider"></div>
+            <div class="meta-stat"><i class="bi bi-eye"></i><strong>4,820 views</strong></div>
+            <div class="meta-stat"><i class="bi bi-heart"></i><strong>312 likes</strong></div>
           </div>
+        </div>
 
-          <!-- Article Body -->
-          <article class="article-body" id="articleBody">
-
-            <p>The conversation around AI in web design used to live in conference keynotes and speculative blog posts. <strong>That era is over.</strong> In 2026, the tools are live, the results are measurable, and the gap between teams that have adopted AI-driven design and those that haven't is growing by the month.</p>
-
-            <p>This isn't about replacing designers or developers. It's about a fundamental shift in how digital products are conceived, built, and continuously improved — and if you're building for the web, you need to understand what's actually happening on the ground.</p>
-
-            <!-- Section 1 -->
-            <h2 id="s1"><span class="h-accent"></span>The State of AI in Web Design Today</h2>
-
-            <p>Three years ago, AI tools for design primarily meant <em>autocomplete and smart suggestions</em>. Today, the landscape looks completely different. We have tools that generate entire layout systems from a written brief, models that can infer a user's intent before they've finished typing, and front-end frameworks that can rebuild themselves in response to usage data in real time.</p>
-
-            <div class="info-box info-note">
-              <div class="info-box-icon"><i class="bi bi-info-circle-fill"></i></div>
-              <div class="info-box-text">
-                <strong>Quick Stat</strong>
-                According to recent industry surveys, over 68% of digital agencies now use AI tools in at least one stage of their web design workflow — up from 23% in 2023.
+        <!-- Hero Visual -->
+        <div class="post-hero-visual">
+          <div class="hero-visual-inner">
+            <div class="hv-grid"></div>
+            <div class="hv-glow-left"></div>
+            <div class="hv-glow-right"></div>
+            <div class="hv-content">
+              <div class="hv-icon-cluster">
+                <div class="hv-icon side"><i class="bi bi-palette2"></i></div>
+                <div class="hv-icon main"><i class="bi bi-cpu"></i></div>
+                <div class="hv-icon side"><i class="bi bi-code-slash"></i></div>
               </div>
+              <div class="hv-headline">AI × Web Design</div>
+              <div class="hv-subline">The Complete 2026 Landscape</div>
+            </div>
+            <div class="hv-badge-float top-left"><i class="bi bi-stars"></i> Generative UI</div>
+            <div class="hv-badge-float top-right"><i class="bi bi-graph-up-arrow"></i> +340% Adoption</div>
+            <div class="hv-badge-float bot-left"><i class="bi bi-shield-check"></i> Verified Research</div>
+            <div class="hv-badge-float bot-right"><i class="bi bi-clock"></i> June 2026</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============================================================
+         ARTICLE BODY + SIDEBAR
+    ============================================================ -->
+    <section class="article-layout">
+      <div class="container">
+        <div class="article-layout-inner">
+
+          <!-- ── Main Article column ─────────────────────────── -->
+          <div class="article-content"><!-- FIX: this wrapper was missing -->
+
+            <!-- Table of Contents -->
+            <div class="article-toc">
+              <div class="toc-title"><i class="bi bi-list-ul"></i> Table of Contents</div>
+              <ol class="toc-list">
+                <li><a href="#s1">The State of AI in Web Design Today</a></li>
+                <li><a href="#s2">Generative UI: When the Interface Designs Itself</a></li>
+                <li class="toc-sub"><a href="#s2a">What Generative UI Actually Looks Like</a></li>
+                <li><a href="#s3">Predictive UX Patterns Powered by ML</a></li>
+                <li><a href="#s4">Key Statistics You Need to Know</a></li>
+                <li><a href="#s5">What This Means for Businesses &amp; Developers</a></li>
+                <li><a href="#s6">How to Future-Proof Your Web Strategy</a></li>
+                <li><a href="#s7">Final Thoughts</a></li>
+              </ol>
             </div>
 
-            <p>The critical distinction is that AI is no longer being bolted on top of existing workflows. For leading teams, it's woven into the foundation — affecting everything from initial wireframing through to post-launch A/B testing and content personalisation.</p>
+            <!-- Article Body -->
+            <article class="article-body" id="articleBody">
 
-            <ul class="article-list">
-              <li>AI-assisted layout generation reduces initial wireframe time by up to <strong>65%</strong> for experienced teams</li>
-              <li>Automated accessibility auditing powered by LLMs is catching issues human reviewers miss</li>
-              <li>Personalisation engines now operate at the component level, not just the content level</li>
-              <li>Code generation tools have reached a level of reliability where junior developers ship production-quality React in hours</li>
-            </ul>
+              <p>The conversation around AI in web design used to live in conference keynotes and speculative blog posts. <strong>That era is over.</strong> In 2026, the tools are live, the results are measurable, and the gap between teams that have adopted AI-driven design and those that haven't is growing by the month.</p>
 
-            <!-- Section 2 -->
-            <h2 id="s2"><span class="h-accent"></span>Generative UI: When the Interface Designs Itself</h2>
+              <p>This isn't about replacing designers or developers. It's about a fundamental shift in how digital products are conceived, built, and continuously improved — and if you're building for the web, you need to understand what's actually happening on the ground.</p>
 
-            <p>The most discussed — and arguably the most misunderstood — development of the last 12 months is <strong>Generative UI</strong>. The core idea is straightforward: instead of a designer crafting every state of every component manually, an AI model generates interface components on the fly based on context, user behaviour, and defined design tokens.</p>
+              <!-- Section 1 -->
+              <h2 id="s1"><span class="h-accent"></span>The State of AI in Web Design Today</h2>
 
-            <div class="pull-quote">
-              <div class="pull-quote-text">The interface is no longer a fixed artifact — it's a living system that negotiates between brand consistency, user intent, and real-time context.</div>
-              <div class="pull-quote-source">— Design Systems Weekly, April 2026</div>
-            </div>
+              <p>Three years ago, AI tools for design primarily meant <em>autocomplete and smart suggestions</em>. Today, the landscape looks completely different. We have tools that generate entire layout systems from a written brief, models that can infer a user's intent before they've finished typing, and front-end frameworks that can rebuild themselves in response to usage data in real time.</p>
 
-            <h3 id="s2a">What Generative UI Actually Looks Like</h3>
-
-            <p>A practical example: a returning user visits an e-commerce platform late at night on a mobile device. A generative UI system detects the time, device type, previous browsing history, and current cart state — and renders a simplified, high-contrast layout with night mode and a single prominent CTA, rather than the full desktop-oriented homepage.</p>
-
-            <p>None of this required a designer to create that specific layout. The system generated it, within the bounds of the defined design system. This is the paradigm shift.</p>
-
-            <div class="code-block">
-              <div class="code-header">
-                <div style="display:flex;align-items:center;gap:10px;">
-                  <div class="code-dots">
-                    <div class="code-dot" style="background:#ff5f57;"></div>
-                    <div class="code-dot" style="background:#febc2e;"></div>
-                    <div class="code-dot" style="background:#28c840;"></div>
-                  </div>
-                  <span class="code-lang">JavaScript — Generative UI Pattern</span>
+              <div class="info-box info-note">
+                <div class="info-box-icon"><i class="bi bi-info-circle-fill"></i></div>
+                <div class="info-box-text">
+                  <strong>Quick Stat</strong>
+                  According to recent industry surveys, over 68% of digital agencies now use AI tools in at least one stage of their web design workflow — up from 23% in 2023.
                 </div>
-                <button class="code-copy" onclick="copyCode(this)"><i class="bi bi-clipboard"></i> Copy</button>
               </div>
-              <pre class="code-body"><span class="cm">// Simplified generative UI resolver</span>
+
+              <p>The critical distinction is that AI is no longer being bolted on top of existing workflows. For leading teams, it's woven into the foundation — affecting everything from initial wireframing through to post-launch A/B testing and content personalisation.</p>
+
+              <ul class="article-list">
+                <li>AI-assisted layout generation reduces initial wireframe time by up to <strong>65%</strong> for experienced teams</li>
+                <li>Automated accessibility auditing powered by LLMs is catching issues human reviewers miss</li>
+                <li>Personalisation engines now operate at the component level, not just the content level</li>
+                <li>Code generation tools have reached a level of reliability where junior developers ship production-quality React in hours</li>
+              </ul>
+
+              <!-- Section 2 -->
+              <h2 id="s2"><span class="h-accent"></span>Generative UI: When the Interface Designs Itself</h2>
+
+              <p>The most discussed — and arguably the most misunderstood — development of the last 12 months is <strong>Generative UI</strong>. The core idea is straightforward: instead of a designer crafting every state of every component manually, an AI model generates interface components on the fly based on context, user behaviour, and defined design tokens.</p>
+
+              <div class="pull-quote">
+                <div class="pull-quote-text">The interface is no longer a fixed artifact — it's a living system that negotiates between brand consistency, user intent, and real-time context.</div>
+                <div class="pull-quote-source">— Design Systems Weekly, April 2026</div>
+              </div>
+
+              <h3 id="s2a">What Generative UI Actually Looks Like</h3>
+
+              <p>A practical example: a returning user visits an e-commerce platform late at night on a mobile device. A generative UI system detects the time, device type, previous browsing history, and current cart state — and renders a simplified, high-contrast layout with night mode and a single prominent CTA, rather than the full desktop-oriented homepage.</p>
+
+              <p>None of this required a designer to create that specific layout. The system generated it, within the bounds of the defined design system. This is the paradigm shift.</p>
+
+              <div class="code-block">
+                <div class="code-header">
+                  <div style="display:flex;align-items:center;gap:10px;">
+                    <div class="code-dots">
+                      <div class="code-dot" style="background:#ff5f57;"></div>
+                      <div class="code-dot" style="background:#febc2e;"></div>
+                      <div class="code-dot" style="background:#28c840;"></div>
+                    </div>
+                    <span class="code-lang">JavaScript — Generative UI Pattern</span>
+                  </div>
+                  <button class="code-copy" onclick="copyCode(this)"><i class="bi bi-clipboard"></i> Copy</button>
+                </div>
+                <pre class="code-body"><span class="cm">// Simplified generative UI resolver</span>
 <span class="kw">const</span> <span class="fn">resolveLayout</span> = <span class="kw">async</span> (context) => {
   <span class="kw">const</span> { userProfile, device, time, cart } = context;
 
@@ -1385,379 +235,394 @@
 
   <span class="kw">return</span> layout.within(designTokens);
 };</pre>
-            </div>
-
-            <!-- Section 3 -->
-            <h2 id="s3"><span class="h-accent"></span>Predictive UX Patterns Powered by ML</h2>
-
-            <p>Beyond generative layout, machine learning is enabling a new category of UX design that <em>anticipates user actions</em> rather than reacting to them. Think of it as the interface having a model of what you're about to do — and preparing accordingly.</p>
-
-            <div class="info-box info-tip">
-              <div class="info-box-icon"><i class="bi bi-lightbulb-fill"></i></div>
-              <div class="info-box-text">
-                <strong>Pro Tip for Teams</strong>
-                Start with predictive pre-loading before tackling full generative UI. It's lower risk, easier to measure, and often delivers 15–25% improvement in perceived page load speed without redesigning anything.
               </div>
-            </div>
 
-            <p>Concrete applications that are shipping in production today include predictive pre-loading of routes the user is likely to navigate to, intelligent form field ordering based on user profile, progressive disclosure timed to scroll velocity, and proactive error prevention that warns users before they make a mistake.</p>
+              <!-- Section 3 -->
+              <h2 id="s3"><span class="h-accent"></span>Predictive UX Patterns Powered by ML</h2>
 
-            <!-- Article Img placeholder -->
-            <div class="article-img">
-              <div class="article-img-inner">
-                <div class="img-grid"></div>
-                <div style="position:relative;z-index:2;text-align:center;">
-                  <div style="font-size:2.5rem;color:rgba(72,176,168,0.5);margin-bottom:10px;"><i class="bi bi-diagram-3"></i></div>
-                  <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;color:rgba(255,255,255,0.5);">Predictive UX Signal Flow Diagram</div>
-                  <div style="font-size:0.75rem;color:var(--text-muted);margin-top:6px;">User signals → ML model → Interface adaptation</div>
+              <p>Beyond generative layout, machine learning is enabling a new category of UX design that <em>anticipates user actions</em> rather than reacting to them. Think of it as the interface having a model of what you're about to do — and preparing accordingly.</p>
+
+              <div class="info-box info-tip">
+                <div class="info-box-icon"><i class="bi bi-lightbulb-fill"></i></div>
+                <div class="info-box-text">
+                  <strong>Pro Tip for Teams</strong>
+                  Start with predictive pre-loading before tackling full generative UI. It's lower risk, easier to measure, and often delivers 15–25% improvement in perceived page load speed without redesigning anything.
                 </div>
               </div>
-              <div class="article-img-caption"><i class="bi bi-image"></i> Figure 1: How predictive signals feed into real-time UX decisions in a modern web application.</div>
-            </div>
 
-            <!-- Section 4: Stats -->
-            <h2 id="s4"><span class="h-accent"></span>Key Statistics You Need to Know</h2>
+              <p>Concrete applications that are shipping in production today include predictive pre-loading of routes the user is likely to navigate to, intelligent form field ordering based on user profile, progressive disclosure timed to scroll velocity, and proactive error prevention that warns users before they make a mistake.</p>
 
-            <div class="article-stat-row">
-              <div class="article-stat-item">
-                <div class="article-stat-num">68%</div>
-                <div class="article-stat-lbl">Agencies using AI in design workflows</div>
-              </div>
-              <div class="article-stat-item">
-                <div class="article-stat-num">3.2×</div>
-                <div class="article-stat-lbl">Faster initial design iteration</div>
-              </div>
-              <div class="article-stat-item">
-                <div class="article-stat-num">+41%</div>
-                <div class="article-stat-lbl">Average conversion lift from AI personalisation</div>
-              </div>
-            </div>
-
-            <div class="info-box info-warn">
-              <div class="info-box-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
-              <div class="info-box-text">
-                <strong>Important Caveat</strong>
-                These gains aren't automatic. Organisations that see 40%+ conversion improvements have invested significantly in data infrastructure, design system quality, and team training. AI amplifies what's already there — it doesn't fix a broken foundation.
-              </div>
-            </div>
-
-            <!-- Section 5 -->
-            <h2 id="s5"><span class="h-accent"></span>What This Means for Businesses & Developers</h2>
-
-            <p>For business owners and stakeholders, the implication is clear: websites built without AI-readiness built in are already beginning to show their age. The question is no longer <em>whether</em> to integrate AI into your digital presence, but <em>how urgently</em> and in what order.</p>
-
-            <ol class="article-list numbered">
-              <li><strong>Audit your design system</strong> — AI tools are only as good as the tokens and constraints you give them. If your design system is fragmented, this is the single highest-leverage investment you can make right now.</li>
-              <li><strong>Instrument for data</strong> — Predictive UX requires behavioural data. Start capturing structured interaction events if you aren't already.</li>
-              <li><strong>Run a generative layout pilot</strong> — Choose one high-traffic, low-risk page and test an AI-generated layout variant. Measure hard.</li>
-              <li><strong>Train your team</strong> — AI won't remove the need for skilled designers and developers. It will, however, demand that they know how to direct and evaluate AI output critically.</li>
-            </ol>
-
-            <!-- Section 6 -->
-            <h2 id="s6"><span class="h-accent"></span>How to Future-Proof Your Web Strategy</h2>
-
-            <p>The organisations that will win in the next three years are those that treat their website as a <strong>living system</strong> rather than a periodic project. This requires a shift in budget allocation, team structure, and success metrics.</p>
-
-            <p>Rather than launching a new website every 2-3 years, the forward-thinking approach is to establish a continuous improvement engine — with AI handling the bulk of variation testing and personalisation, while human designers focus on brand direction, edge cases, and strategic decisions that require creative judgement.</p>
-
-            <!-- Section 7 -->
-            <h2 id="s7"><span class="h-accent"></span>Final Thoughts</h2>
-
-            <p>AI is not coming for web design — it has already arrived. The most useful framing we've found is this: AI is raising the floor for what's expected of a professional web presence, while simultaneously lowering the cost of reaching that floor for teams that adopt it thoughtfully.</p>
-
-            <p>The risk isn't being replaced by AI. The risk is being out-executed by a competitor who learned how to use it six months before you did.</p>
-
-            <p>At TSSG-TECH, we've been integrating AI-assisted workflows into our client projects since early 2025. If you want to talk through what this means for your specific business and website, <a href="#">reach out to our team</a> — we're happy to walk you through what we're seeing in the field.</p>
-
-          </article><!-- /article body -->
-
-          <!-- Post Footer Bar -->
-          <div class="post-footer-bar">
-            <div class="post-tags">
-              <span class="post-tags-label">Tags:</span>
-              <span class="post-tag">AI</span>
-              <span class="post-tag">Web Design</span>
-              <span class="post-tag">UX</span>
-              <span class="post-tag">Machine Learning</span>
-              <span class="post-tag">2026</span>
-            </div>
-            <div class="post-share-row">
-              <span class="share-row-label">Share:</span>
-              <button class="share-icon-btn" title="Twitter"><i class="bi bi-twitter-x"></i></button>
-              <button class="share-icon-btn" title="LinkedIn"><i class="bi bi-linkedin"></i></button>
-              <button class="share-icon-btn" title="WhatsApp"><i class="bi bi-whatsapp"></i></button>
-              <button class="share-icon-btn" title="Copy Link"><i class="bi bi-link-45deg"></i></button>
-            </div>
-          </div>
-
-          <!-- Post Prev/Next -->
-          <div class="post-navigation">
-            <div class="post-nav-item prev">
-              <div class="post-nav-dir"><i class="bi bi-arrow-left"></i> Previous Post</div>
-              <div class="post-nav-title">10 UI Design Trends Dominating the Web in 2026</div>
-            </div>
-            <div class="post-nav-item next">
-              <div class="post-nav-dir">Next Post <i class="bi bi-arrow-right"></i></div>
-              <div class="post-nav-title">Build a Full-Stack Web App with Next.js 15 and Supabase</div>
-            </div>
-          </div>
-
-          <!-- Author Card -->
-          <div class="author-card">
-            <div class="author-card-avatar">RS</div>
-            <div class="author-card-info">
-              <div class="author-card-label">Written By</div>
-              <div class="author-card-name">Rahul Sharma</div>
-              <div class="author-card-role">Lead Developer & Technical Writer at TSSG-TECH</div>
-              <div class="author-card-bio">Rahul has 9+ years of experience in full-stack development and technical writing. He focuses on the intersection of AI, web architecture, and human-centred design. His articles have been read by 200,000+ developers worldwide.</div>
-              <div class="author-socials">
-                <button class="author-social-btn"><i class="bi bi-twitter-x"></i></button>
-                <button class="author-social-btn"><i class="bi bi-linkedin"></i></button>
-                <button class="author-social-btn"><i class="bi bi-github"></i></button>
-                <button class="author-social-btn"><i class="bi bi-globe2"></i></button>
-              </div>
-            </div>
-          </div>
-
-          <!-- Comments -->
-          <div class="comments-section" id="comments">
-            <div class="comments-header">
-              <h3>Comments</h3>
-              <span class="comments-count">4</span>
-            </div>
-
-            <!-- Comment 1 -->
-            <div class="comment-item">
-              <div class="comment-avatar">SK</div>
-              <div class="comment-body-wrap">
-                <div class="comment-meta-row">
-                  <span class="comment-author-name">Sanjay Kumar</span>
-                  <span class="comment-date">Jun 11, 2026 · 09:14</span>
+              <!-- Article image placeholder -->
+              <div class="article-img">
+                <div class="article-img-inner">
+                  <div class="img-grid"></div>
+                  <div style="position:relative;z-index:2;text-align:center;">
+                    <div style="font-size:2.5rem;color:rgba(72,176,168,0.5);margin-bottom:10px;"><i class="bi bi-diagram-3"></i></div>
+                    <div style="font-family:var(--font-display);font-size:1rem;font-weight:700;color:rgba(255,255,255,0.5);">Predictive UX Signal Flow Diagram</div>
+                    <div style="font-size:0.75rem;color:var(--text-muted);margin-top:6px;">User signals → ML model → Interface adaptation</div>
+                  </div>
                 </div>
-                <div class="comment-text">Really insightful article! The point about design systems being the foundation for AI effectiveness is something more teams need to hear. We've seen firsthand how a broken token system kills the value of any AI tooling on top of it.</div>
-                <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
+                <div class="article-img-caption"><i class="bi bi-image"></i> Figure 1: How predictive signals feed into real-time UX decisions in a modern web application.</div>
               </div>
-            </div>
 
-            <!-- Reply to comment 1 -->
-            <div class="comment-item reply">
-              <div class="comment-avatar" style="background:linear-gradient(135deg,var(--main-color),#1a8a80);">RS</div>
-              <div class="comment-body-wrap" style="border-color:rgba(72,176,168,0.2);">
-                <div class="comment-meta-row">
-                  <span class="comment-author-name" style="color:var(--main-color);">Rahul Sharma <span style="font-size:0.68rem;font-weight:500;margin-left:6px;padding:2px 7px;background:rgba(72,176,168,0.15);border-radius:var(--radius-pill);color:var(--main-color);">Author</span></span>
-                  <span class="comment-date">Jun 11, 2026 · 10:32</span>
-                </div>
-                <div class="comment-text">Exactly right, Sanjay. It's probably the most common mistake we see — teams trying to jump to generative UI without having consistent tokens and documentation in place. The AI can't work with ambiguity any better than a new designer can.</div>
-                <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
-              </div>
-            </div>
+              <!-- Section 4: Stats -->
+              <h2 id="s4"><span class="h-accent"></span>Key Statistics You Need to Know</h2>
 
-            <!-- Comment 2 -->
-            <div class="comment-item">
-              <div class="comment-avatar" style="background:linear-gradient(135deg,#581e80,#3a1060);">AM</div>
-              <div class="comment-body-wrap">
-                <div class="comment-meta-row">
-                  <span class="comment-author-name">Ananya Mehta</span>
-                  <span class="comment-date">Jun 12, 2026 · 07:55</span>
+              <div class="article-stat-row">
+                <div class="article-stat-item">
+                  <div class="article-stat-num">68%</div>
+                  <div class="article-stat-lbl">Agencies using AI in design workflows</div>
                 </div>
-                <div class="comment-text">The generative UI code example was super helpful — do you have a longer version of this with error handling and fallback states? Would love to see a full tutorial follow-up.</div>
-                <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
-              </div>
-            </div>
-
-            <!-- Comment 3 -->
-            <div class="comment-item">
-              <div class="comment-avatar" style="background:linear-gradient(135deg,#1a5a2a,#0e3a18);">DP</div>
-              <div class="comment-body-wrap">
-                <div class="comment-meta-row">
-                  <span class="comment-author-name">Dev Prakash</span>
-                  <span class="comment-date">Jun 12, 2026 · 11:20</span>
+                <div class="article-stat-item">
+                  <div class="article-stat-num">3.2×</div>
+                  <div class="article-stat-lbl">Faster initial design iteration</div>
                 </div>
-                <div class="comment-text">Great coverage of the predictive UX area. One thing I'd add: the privacy implications here are significant. User consent and data governance need to be baked into the architecture from day one, not treated as an afterthought.</div>
-                <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
-              </div>
-            </div>
-
-            <!-- Comment Form -->
-            <div class="comment-form-section">
-              <div class="comment-form-title"><i class="bi bi-chat-square-dots-fill"></i> Leave a Comment</div>
-              <div class="cform-row">
-                <div class="cform-group">
-                  <label>Your Name *</label>
-                  <input type="text" placeholder="John Doe"/>
-                </div>
-                <div class="cform-group">
-                  <label>Email Address *</label>
-                  <input type="email" placeholder="john@example.com"/>
+                <div class="article-stat-item">
+                  <div class="article-stat-num">+41%</div>
+                  <div class="article-stat-lbl">Average conversion lift from AI personalisation</div>
                 </div>
               </div>
-              <div class="cform-group" style="margin-bottom:16px;">
-                <label>Website (optional)</label>
-                <input type="url" placeholder="https://yourwebsite.com"/>
+
+              <div class="info-box info-warn">
+                <div class="info-box-icon"><i class="bi bi-exclamation-triangle-fill"></i></div>
+                <div class="info-box-text">
+                  <strong>Important Caveat</strong>
+                  These gains aren't automatic. Organisations that see 40%+ conversion improvements have invested significantly in data infrastructure, design system quality, and team training. AI amplifies what's already there — it doesn't fix a broken foundation.
+                </div>
               </div>
-              <div class="cform-group" style="margin-bottom:20px;">
-                <label>Your Comment *</label>
-                <textarea placeholder="Share your thoughts, questions, or experiences…"></textarea>
+
+              <!-- Section 5 -->
+              <h2 id="s5"><span class="h-accent"></span>What This Means for Businesses &amp; Developers</h2>
+
+              <p>For business owners and stakeholders, the implication is clear: websites built without AI-readiness built in are already beginning to show their age. The question is no longer <em>whether</em> to integrate AI into your digital presence, but <em>how urgently</em> and in what order.</p>
+
+              <ol class="article-list numbered">
+                <li><strong>Audit your design system</strong> — AI tools are only as good as the tokens and constraints you give them. If your design system is fragmented, this is the single highest-leverage investment you can make right now.</li>
+                <li><strong>Instrument for data</strong> — Predictive UX requires behavioural data. Start capturing structured interaction events if you aren't already.</li>
+                <li><strong>Run a generative layout pilot</strong> — Choose one high-traffic, low-risk page and test an AI-generated layout variant. Measure hard.</li>
+                <li><strong>Train your team</strong> — AI won't remove the need for skilled designers and developers. It will, however, demand that they know how to direct and evaluate AI output critically.</li>
+              </ol>
+
+              <!-- Section 6 -->
+              <h2 id="s6"><span class="h-accent"></span>How to Future-Proof Your Web Strategy</h2>
+
+              <p>The organisations that will win in the next three years are those that treat their website as a <strong>living system</strong> rather than a periodic project. This requires a shift in budget allocation, team structure, and success metrics.</p>
+
+              <p>Rather than launching a new website every 2-3 years, the forward-thinking approach is to establish a continuous improvement engine — with AI handling the bulk of variation testing and personalisation, while human designers focus on brand direction, edge cases, and strategic decisions that require creative judgement.</p>
+
+              <!-- Section 7 -->
+              <h2 id="s7"><span class="h-accent"></span>Final Thoughts</h2>
+
+              <p>AI is not coming for web design — it has already arrived. The most useful framing we've found is this: AI is raising the floor for what's expected of a professional web presence, while simultaneously lowering the cost of reaching that floor for teams that adopt it thoughtfully.</p>
+
+              <p>The risk isn't being replaced by AI. The risk is being out-executed by a competitor who learned how to use it six months before you did.</p>
+
+              <p>At TSSG-TECH, we've been integrating AI-assisted workflows into our client projects since early 2025. If you want to talk through what this means for your specific business and website, <a href="#">reach out to our team</a> — we're happy to walk you through what we're seeing in the field.</p>
+
+            </article><!-- /article body -->
+
+            <!-- Post Footer Bar -->
+            <div class="post-footer-bar">
+              <div class="post-tags">
+                <span class="post-tags-label">Tags:</span>
+                <span class="post-tag">AI</span>
+                <span class="post-tag">Web Design</span>
+                <span class="post-tag">UX</span>
+                <span class="post-tag">Machine Learning</span>
+                <span class="post-tag">2026</span>
               </div>
-              <button class="btn-submit-comment"><i class="bi bi-send-fill"></i> Post Comment</button>
-            </div>
-          </div>
-
-        </main><!-- /main -->
-
-        <!-- ── Detail Sidebar ─────────────────────────────────── -->
-        <aside class="detail-sidebar">
-
-          <!-- TOC (sticky sidebar) -->
-          <div class="ds-widget">
-            <div class="ds-widget-header"><div class="dot"></div><h5>In This Article</h5></div>
-            <div class="ds-widget-body">
-              <ul class="sidebar-toc-list">
-                <li><a href="#s1" class="active-toc"><i class="bi bi-chevron-right"></i>State of AI Today</a></li>
-                <li><a href="#s2"><i class="bi bi-chevron-right"></i>Generative UI</a></li>
-                <li><a href="#s3"><i class="bi bi-chevron-right"></i>Predictive UX Patterns</a></li>
-                <li><a href="#s4"><i class="bi bi-chevron-right"></i>Key Statistics</a></li>
-                <li><a href="#s5"><i class="bi bi-chevron-right"></i>What This Means</a></li>
-                <li><a href="#s6"><i class="bi bi-chevron-right"></i>Future-Proof Your Strategy</a></li>
-                <li><a href="#s7"><i class="bi bi-chevron-right"></i>Final Thoughts</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <!-- Share -->
-          <div class="ds-widget">
-            <div class="ds-widget-header"><div class="dot"></div><h5>Share This Article</h5></div>
-            <div class="ds-widget-body">
-              <div class="ds-share-list">
-                <div class="ds-share-item twitter"><i class="bi bi-twitter-x"></i> Share on X</div>
-                <div class="ds-share-item linkedin"><i class="bi bi-linkedin"></i> Share on LinkedIn</div>
-                <div class="ds-share-item whatsapp"><i class="bi bi-whatsapp"></i> Share on WhatsApp</div>
-                <div class="ds-share-item copy"><i class="bi bi-link-45deg"></i> Copy Link</div>
+              <div class="post-share-row">
+                <span class="share-row-label">Share:</span>
+                <button class="share-icon-btn" title="Twitter"><i class="bi bi-twitter-x"></i></button>
+                <button class="share-icon-btn" title="LinkedIn"><i class="bi bi-linkedin"></i></button>
+                <button class="share-icon-btn" title="WhatsApp"><i class="bi bi-whatsapp"></i></button>
+                <button class="share-icon-btn" title="Copy Link"><i class="bi bi-link-45deg"></i></button>
               </div>
             </div>
-          </div>
 
-          <!-- Newsletter -->
-          <div class="ds-newsletter">
-            <div class="ds-nl-icon"><i class="bi bi-envelope-paper-fill"></i></div>
-            <div class="ds-nl-title">Stay Updated</div>
-            <div class="ds-nl-text">Get articles like this delivered every week. No spam — just useful content for web professionals.</div>
-            <input class="ds-nl-input" type="email" placeholder="Your email address…"/>
-            <button class="ds-nl-btn">Subscribe Free →</button>
-          </div>
+            <!-- Post Prev/Next -->
+            <div class="post-navigation">
+              <div class="post-nav-item prev">
+                <div class="post-nav-dir"><i class="bi bi-arrow-left"></i> Previous Post</div>
+                <div class="post-nav-title">10 UI Design Trends Dominating the Web in 2026</div>
+              </div>
+              <div class="post-nav-item next">
+                <div class="post-nav-dir">Next Post <i class="bi bi-arrow-right"></i></div>
+                <div class="post-nav-title">Build a Full-Stack Web App with Next.js 15 and Supabase</div>
+              </div>
+            </div>
 
-          <!-- Post info card -->
-          <div class="ds-widget">
-            <div class="ds-widget-header"><div class="dot"></div><h5>Article Details</h5></div>
-            <div class="ds-widget-body">
-              <div style="display:flex;flex-direction:column;gap:12px;">
-                <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-                  <span style="color:var(--text-muted);">Published</span>
-                  <span style="color:rgba(255,255,255,0.7);font-weight:600;">June 10, 2026</span>
-                </div>
-                <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-                  <span style="color:var(--text-muted);">Category</span>
-                  <span style="color:var(--main-color);font-weight:600;">AI & ML</span>
-                </div>
-                <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-                  <span style="color:var(--text-muted);">Read Time</span>
-                  <span style="color:rgba(255,255,255,0.7);font-weight:600;">9 minutes</span>
-                </div>
-                <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-                  <span style="color:var(--text-muted);">Views</span>
-                  <span style="color:rgba(255,255,255,0.7);font-weight:600;">4,820</span>
-                </div>
-                <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
-                  <span style="color:var(--text-muted);">Comments</span>
-                  <span style="color:rgba(255,255,255,0.7);font-weight:600;">4</span>
+            <!-- Author Card -->
+            <div class="author-card">
+              <div class="author-card-avatar">RS</div>
+              <div class="author-card-info">
+                <div class="author-card-label">Written By</div>
+                <div class="author-card-name">Rahul Sharma</div>
+                <div class="author-card-role">Lead Developer &amp; Technical Writer at TSSG-TECH</div>
+                <div class="author-card-bio">Rahul has 9+ years of experience in full-stack development and technical writing. He focuses on the intersection of AI, web architecture, and human-centred design. His articles have been read by 200,000+ developers worldwide.</div>
+                <div class="author-socials">
+                  <button class="author-social-btn"><i class="bi bi-twitter-x"></i></button>
+                  <button class="author-social-btn"><i class="bi bi-linkedin"></i></button>
+                  <button class="author-social-btn"><i class="bi bi-github"></i></button>
+                  <button class="author-social-btn"><i class="bi bi-globe2"></i></button>
                 </div>
               </div>
             </div>
-          </div>
 
-        </aside>
+            <!-- Comments -->
+            <div class="comments-section" id="comments">
+              <div class="comments-header">
+                <h3>Comments</h3>
+                <span class="comments-count">4</span>
+              </div>
 
+              <!-- Comment 1 -->
+              <div class="comment-item">
+                <div class="comment-avatar">SK</div>
+                <div class="comment-body-wrap">
+                  <div class="comment-meta-row">
+                    <span class="comment-author-name">Sanjay Kumar</span>
+                    <span class="comment-date">Jun 11, 2026 · 09:14</span>
+                  </div>
+                  <div class="comment-text">Really insightful article! The point about design systems being the foundation for AI effectiveness is something more teams need to hear. We've seen firsthand how a broken token system kills the value of any AI tooling on top of it.</div>
+                  <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
+                </div>
+              </div>
+
+              <!-- Reply to comment 1 -->
+              <div class="comment-item reply">
+                <div class="comment-avatar" style="background:linear-gradient(135deg,var(--main-color),#1a8a80);">RS</div>
+                <div class="comment-body-wrap" style="border-color:rgba(72,176,168,0.2);">
+                  <div class="comment-meta-row">
+                    <span class="comment-author-name" style="color:var(--main-color);">Rahul Sharma <span style="font-size:0.68rem;font-weight:500;margin-left:6px;padding:2px 7px;background:rgba(72,176,168,0.15);border-radius:var(--radius-pill);color:var(--main-color);">Author</span></span>
+                    <span class="comment-date">Jun 11, 2026 · 10:32</span>
+                  </div>
+                  <div class="comment-text">Exactly right, Sanjay. It's probably the most common mistake we see — teams trying to jump to generative UI without having consistent tokens and documentation in place. The AI can't work with ambiguity any better than a new designer can.</div>
+                  <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
+                </div>
+              </div>
+
+              <!-- Comment 2 -->
+              <div class="comment-item">
+                <div class="comment-avatar" style="background:linear-gradient(135deg,#581e80,#3a1060);">AM</div>
+                <div class="comment-body-wrap">
+                  <div class="comment-meta-row">
+                    <span class="comment-author-name">Ananya Mehta</span>
+                    <span class="comment-date">Jun 12, 2026 · 07:55</span>
+                  </div>
+                  <div class="comment-text">The generative UI code example was super helpful — do you have a longer version of this with error handling and fallback states? Would love to see a full tutorial follow-up.</div>
+                  <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
+                </div>
+              </div>
+
+              <!-- Comment 3 -->
+              <div class="comment-item">
+                <div class="comment-avatar" style="background:linear-gradient(135deg,#1a5a2a,#0e3a18);">DP</div>
+                <div class="comment-body-wrap">
+                  <div class="comment-meta-row">
+                    <span class="comment-author-name">Dev Prakash</span>
+                    <span class="comment-date">Jun 12, 2026 · 11:20</span>
+                  </div>
+                  <div class="comment-text">Great coverage of the predictive UX area. One thing I'd add: the privacy implications here are significant. User consent and data governance need to be baked into the architecture from day one, not treated as an afterthought.</div>
+                  <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
+                </div>
+              </div>
+
+              <!-- Comment Form -->
+              <div class="comment-form-section">
+                <div class="comment-form-title"><i class="bi bi-chat-square-dots-fill"></i> Leave a Comment</div>
+                <div class="cform-row">
+                  <div class="cform-group">
+                    <label>Your Name *</label>
+                    <input type="text" placeholder="John Doe"/>
+                  </div>
+                  <div class="cform-group">
+                    <label>Email Address *</label>
+                    <input type="email" placeholder="john@example.com"/>
+                  </div>
+                </div>
+                <div class="cform-group" style="margin-bottom:16px;">
+                  <label>Website (optional)</label>
+                  <input type="url" placeholder="https://yourwebsite.com"/>
+                </div>
+                <div class="cform-group" style="margin-bottom:20px;">
+                  <label>Your Comment *</label>
+                  <textarea placeholder="Share your thoughts, questions, or experiences…"></textarea>
+                </div>
+                <button class="btn-submit-comment"><i class="bi bi-send-fill"></i> Post Comment</button>
+              </div>
+            </div><!-- /comments -->
+
+          </div><!-- /article-content -->
+
+          <!-- ── Detail Sidebar ─────────────────────────────── -->
+          <aside class="detail-sidebar">
+
+            <!-- TOC (sticky sidebar) -->
+            <div class="ds-widget">
+              <div class="ds-widget-header"><div class="dot"></div><h5>In This Article</h5></div>
+              <div class="ds-widget-body">
+                <ul class="sidebar-toc-list">
+                  <li><a href="#s1" class="active-toc"><i class="bi bi-chevron-right"></i>State of AI Today</a></li>
+                  <li><a href="#s2"><i class="bi bi-chevron-right"></i>Generative UI</a></li>
+                  <li><a href="#s3"><i class="bi bi-chevron-right"></i>Predictive UX Patterns</a></li>
+                  <li><a href="#s4"><i class="bi bi-chevron-right"></i>Key Statistics</a></li>
+                  <li><a href="#s5"><i class="bi bi-chevron-right"></i>What This Means</a></li>
+                  <li><a href="#s6"><i class="bi bi-chevron-right"></i>Future-Proof Your Strategy</a></li>
+                  <li><a href="#s7"><i class="bi bi-chevron-right"></i>Final Thoughts</a></li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Share -->
+            <div class="ds-widget">
+              <div class="ds-widget-header"><div class="dot"></div><h5>Share This Article</h5></div>
+              <div class="ds-widget-body">
+                <div class="ds-share-list">
+                  <div class="ds-share-item twitter"><i class="bi bi-twitter-x"></i> Share on X</div>
+                  <div class="ds-share-item linkedin"><i class="bi bi-linkedin"></i> Share on LinkedIn</div>
+                  <div class="ds-share-item whatsapp"><i class="bi bi-whatsapp"></i> Share on WhatsApp</div>
+                  <div class="ds-share-item copy"><i class="bi bi-link-45deg"></i> Copy Link</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="ds-newsletter">
+              <div class="ds-nl-icon"><i class="bi bi-envelope-paper-fill"></i></div>
+              <div class="ds-nl-title">Stay Updated</div>
+              <div class="ds-nl-text">Get articles like this delivered every week. No spam — just useful content for web professionals.</div>
+              <input class="ds-nl-input" type="email" placeholder="Your email address…"/>
+              <button class="ds-nl-btn">Subscribe Free →</button>
+            </div>
+
+            <!-- Post info card -->
+            <div class="ds-widget">
+              <div class="ds-widget-header"><div class="dot"></div><h5>Article Details</h5></div>
+              <div class="ds-widget-body">
+                <div style="display:flex;flex-direction:column;gap:12px;">
+                  <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                    <span style="color:var(--text-muted);">Published</span>
+                    <span style="color:rgba(255,255,255,0.7);font-weight:600;">June 10, 2026</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                    <span style="color:var(--text-muted);">Category</span>
+                    <span style="color:var(--main-color);font-weight:600;">AI &amp; ML</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                    <span style="color:var(--text-muted);">Read Time</span>
+                    <span style="color:rgba(255,255,255,0.7);font-weight:600;">9 minutes</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                    <span style="color:var(--text-muted);">Views</span>
+                    <span style="color:rgba(255,255,255,0.7);font-weight:600;">4,820</span>
+                  </div>
+                  <div style="display:flex;justify-content:space-between;font-size:0.8rem;">
+                    <span style="color:var(--text-muted);">Comments</span>
+                    <span style="color:rgba(255,255,255,0.7);font-weight:600;">4</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </aside>
+
+        </div><!-- /article-layout-inner -->
       </div>
-    </div>
-  </section>
+    </section>
 
 
-  <!-- ============================================================
-       RELATED POSTS
-  ============================================================ -->
-  <section class="related-section">
-    <div class="container">
-      <div class="detail-section-label">
-        <div class="lbl-line"></div>
-        <h4>Related Articles</h4>
+    <!-- ============================================================
+         RELATED POSTS
+    ============================================================ -->
+    <section class="related-section">
+      <div class="container">
+        <div class="detail-section-label">
+          <div class="lbl-line"></div>
+          <h4>Related Articles</h4>
+        </div>
+        <div class="related-grid">
+
+          <div class="related-card">
+            <div class="related-visual rv1">
+              <div class="rv-grid"></div>
+              <div class="rv-icon" style="background:rgba(88,35,159,0.2);color:#b07ef5;"><i class="bi bi-palette2"></i></div>
+            </div>
+            <div class="related-body">
+              <div class="related-cat" style="color:#b07ef5;">Design</div>
+              <div class="related-title">10 UI Design Trends Dominating the Web in 2026</div>
+              <div class="related-footer">
+                <span>Priya Singh</span>
+                <span><i class="bi bi-clock me-1" style="color:var(--main-color);font-size:0.7rem;"></i>7 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-card">
+            <div class="related-visual rv2">
+              <div class="rv-grid"></div>
+              <div class="rv-icon" style="background:rgba(72,176,168,0.15);color:var(--main-color);"><i class="bi bi-code-slash"></i></div>
+            </div>
+            <div class="related-body">
+              <div class="related-cat" style="color:var(--main-color);">Development</div>
+              <div class="related-title">Full-Stack Web App with Next.js 15 and Supabase — Step by Step</div>
+              <div class="related-footer">
+                <span>Amit Kumar</span>
+                <span><i class="bi bi-clock me-1" style="color:var(--main-color);font-size:0.7rem;"></i>12 min</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="related-card">
+            <div class="related-visual rv3">
+              <div class="rv-grid"></div>
+              <div class="rv-icon" style="background:rgba(100,220,160,0.12);color:#5ddb9e;"><i class="bi bi-robot"></i></div>
+            </div>
+            <div class="related-body">
+              <div class="related-cat" style="color:#5ddb9e;">AI &amp; ML</div>
+              <div class="related-title">Integrating ChatGPT API Into Your Web App: A Practical Guide</div>
+              <div class="related-footer">
+                <span>Rohan Kapoor</span>
+                <span><i class="bi bi-clock me-1" style="color:var(--main-color);font-size:0.7rem;"></i>10 min</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="related-grid">
-
-        <div class="related-card">
-          <div class="related-visual rv1">
-            <div class="rv-grid"></div>
-            <div class="rv-icon" style="background:rgba(88,35,159,0.2);color:#b07ef5;"><i class="bi bi-palette2"></i></div>
-          </div>
-          <div class="related-body">
-            <div class="related-cat" style="color:#b07ef5;">Design</div>
-            <div class="related-title">10 UI Design Trends Dominating the Web in 2026</div>
-            <div class="related-footer">
-              <span>Priya Singh</span>
-              <span><i class="bi bi-clock me-1" style="color:var(--main-color);font-size:0.7rem;"></i>7 min</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="related-card">
-          <div class="related-visual rv2">
-            <div class="rv-grid"></div>
-            <div class="rv-icon" style="background:rgba(72,176,168,0.15);color:var(--main-color);"><i class="bi bi-code-slash"></i></div>
-          </div>
-          <div class="related-body">
-            <div class="related-cat" style="color:var(--main-color);">Development</div>
-            <div class="related-title">Full-Stack Web App with Next.js 15 and Supabase — Step by Step</div>
-            <div class="related-footer">
-              <span>Amit Kumar</span>
-              <span><i class="bi bi-clock me-1" style="color:var(--main-color);font-size:0.7rem;"></i>12 min</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="related-card">
-          <div class="related-visual rv3">
-            <div class="rv-grid"></div>
-            <div class="rv-icon" style="background:rgba(100,220,160,0.12);color:#5ddb9e;"><i class="bi bi-robot"></i></div>
-          </div>
-          <div class="related-body">
-            <div class="related-cat" style="color:#5ddb9e;">AI & ML</div>
-            <div class="related-title">Integrating ChatGPT API Into Your Web App: A Practical Guide</div>
-            <div class="related-footer">
-              <span>Rohan Kapoor</span>
-              <span><i class="bi bi-clock me-1" style="color:var(--main-color);font-size:0.7rem;"></i>10 min</span>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
+    </section>
 
 
-  <!-- Scroll to Top -->
-  <button class="tssg-scroll-top" id="scrollTop"><i class="bi bi-arrow-up"></i></button>
+    <!-- Scroll to Top -->
+    <button class="tssg-scroll-top" id="scrollTop"><i class="bi bi-arrow-up"></i></button>
+
+    <!-- FOOTER (unchanged) -->
+    <footer class="footer" id="footer"></footer>
+
+  </main>
 
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Tilt Js -->
+  <script src="tilt.jquery.js"></script>
+
+  <!-- AOS Animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // ── Reading Progress ─────────────────────────────────────
+    AOS.init();
+  </script>
+
+  <script>
+    // ── Reading Progress + Scroll Top button ─────────────────
     const progressBar = document.getElementById('readingProgress');
     window.addEventListener('scroll', () => {
-      const doc    = document.documentElement;
-      const total  = doc.scrollHeight - doc.clientHeight;
-      const pct    = (window.scrollY / total) * 100;
+      const doc   = document.documentElement;
+      const total = doc.scrollHeight - doc.clientHeight;
+      const pct   = total > 0 ? (window.scrollY / total) * 100 : 0;
       progressBar.style.width = pct + '%';
-
-      // Scroll top btn
       document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
     });
 
@@ -1789,7 +654,6 @@
     // ── Active TOC Highlight ─────────────────────────────────
     const sections = document.querySelectorAll('article [id]');
     const tocLinks = document.querySelectorAll('.sidebar-toc-list a');
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -1802,7 +666,6 @@
         }
       });
     }, { rootMargin: '-20% 0px -60% 0px' });
-
     sections.forEach(s => observer.observe(s));
 
     // ── Related card nav ─────────────────────────────────────
@@ -1810,15 +673,16 @@
       card.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     });
 
-    // ── Comment form submit ───────────────────────────────────
-    document.querySelector('.btn-submit-comment').addEventListener('click', function() {
+    // ── Comment form submit ──────────────────────────────────
+    document.querySelector('.btn-submit-comment').addEventListener('click', function () {
       const name    = document.querySelector('.cform-group input[type="text"]').value.trim();
       const comment = document.querySelector('.cform-group textarea').value.trim();
       if (!name || !comment) {
         alert('Please fill in your name and comment.');
         return;
       }
-      const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0,2);
+      const safeName = name.replace(/</g, '&lt;');
+      const initials = name.split(' ').map(w => w[0]).join('').toUpperCase().slice(0, 2).replace(/</g, '');
       const colors = ['linear-gradient(135deg,#48B0A8,#2a8078)', 'linear-gradient(135deg,#58239F,#3a1870)', 'linear-gradient(135deg,#f07ab0,#c03080)'];
       const color  = colors[Math.floor(Math.random() * colors.length)];
       const newComment = `
@@ -1826,10 +690,10 @@
           <div class="comment-avatar" style="background:${color};">${initials}</div>
           <div class="comment-body-wrap">
             <div class="comment-meta-row">
-              <span class="comment-author-name">${name}</span>
+              <span class="comment-author-name">${safeName}</span>
               <span class="comment-date">Just now</span>
             </div>
-            <div class="comment-text">${comment.replace(/</g,'&lt;')}</div>
+            <div class="comment-text">${comment.replace(/</g, '&lt;')}</div>
             <span class="comment-reply-btn"><i class="bi bi-reply"></i> Reply</span>
           </div>
         </div>`;
@@ -1837,11 +701,11 @@
       document.querySelector('.cform-group input[type="text"]').value = '';
       document.querySelector('.cform-group input[type="email"]').value = '';
       document.querySelector('.cform-group textarea').value = '';
-      document.querySelector('.comments-count').textContent = parseInt(document.querySelector('.comments-count').textContent) + 1;
+      const cnt = document.querySelector('.comments-count');
+      cnt.textContent = parseInt(cnt.textContent, 10) + 1;
     });
   </script>
-  <style>
-    @keyframes fadeIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:none; } }
-  </style>
+
+ 
 </body>
 </html>

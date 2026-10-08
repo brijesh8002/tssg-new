@@ -1053,9 +1053,37 @@
     });
   </script>
 
-  <script>
-    
-  </script>
+   <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const skillBtns = document.querySelectorAll(".tssg-skill-btn");
+
+            skillBtns.forEach(btn => {
+
+                btn.addEventListener("click", function () {
+
+                    skillBtns.forEach(item => {
+                        item.classList.remove("active");
+                    });
+
+                    document.querySelectorAll(".tssg-skills-grid")
+                        .forEach(grid => {
+                            grid.classList.remove("active");
+                        });
+
+                    this.classList.add("active");
+
+                    const target = this.getAttribute("data-target");
+
+                    document.getElementById(target)
+                        .classList.add("active");
+
+                });
+
+            });
+
+        });
+    </script>
 </body>
 
 </html>
